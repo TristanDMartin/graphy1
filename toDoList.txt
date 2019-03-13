@@ -1,0 +1,3 @@
+Error checking for:    
+    Author, Title, URL, PublishedAt
+Adjust Moment.js for online script pull instead.
