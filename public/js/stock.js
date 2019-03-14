@@ -21,25 +21,39 @@ function buildQueryURL() {
 function makeGraph(obj){
 
     //Stock object
-    var Stock = {
-        openArr: [],
-        closeArr: [],
-    }
+    var priceArr = [];
 
     var values = obj["Time Series (Daily)"];
-    console.log(values[moment().subtract(1, "days").format("YYYY-MM-DD")]["1. open"]);
+    console.log(values[moment().subtract(1, "days").format("YYYY-MM-DD")]);
 
     $("#chart-div").empty();
 
     // Stock.openArr = [2,3];
     // Stock.closeArr = [0,1];
 
+    var x = [];
+    var rowsArr = [];
+    var dateArr = [];
+    var openArr = [];
+    var closeArr = [];
     for(var i=0; i<30; i++){
         var day = moment().subtract(i, "days").format("YYYY-MM-DD");
-        Stock.openArr.push(values[day]);
-        console.log(values[day]);
+
+        //fillout undefined values
+        if(values[day] === undefined){
+            dateArr.unshift(moment().subtract(i, "days").toDate());
+            openArr.unshift(parseFloat(x["1. open"]));
+            closeArr.unshift(parseFloat(x["4. close"]));
+        } else {
+            dateArr.unshift(moment().subtract(i, "days").toDate());
+            openArr.unshift(parseFloat(x["1. open"]));
+            closeArr.unshift(parseFloat(x["4. close"]));
+            x = values[day];
+        }
+        //populate array to be added to graph
+        rowsArr.unshift([dateArr[0], openArr[0], closeArr[0]])
     }
-    // console.log(Stock.openArr[3]);
+    console.log(rowsArr);
 
     google.charts.load('current', {packages: ['corechart', 'line']});
     google.charts.setOnLoadCallback(drawBasic);
@@ -48,7 +62,8 @@ function makeGraph(obj){
 
         var data = new google.visualization.DataTable();
         data.addColumn('date', 'X');
-        data.addColumn('number', 'Dogs');
+        data.addColumn('number', 'Open');
+        data.addColumn('number', 'Close');
 
         //ddd MMM DD YYYY HH:mm:ss
         // var d1 = new Date(2010, 3, 10);
@@ -57,9 +72,7 @@ function makeGraph(obj){
         var d2 = moment().toDate();
         console.log(d1);
         console.log(d2);
-        data.addRows([
-        [d1, 0],   [d2, 10]
-        ]);
+        data.addRows(rowsArr);
 
         var options = {
         hAxis: {
