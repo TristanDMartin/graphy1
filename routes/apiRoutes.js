@@ -24,6 +24,8 @@ module.exports = function(app) {
 
   // search for company name by stock symbol
   app.get("/api/stock/:symbol", function(req, res) {
-
+    db.Stock.destroy({ where: { symbol: req.params.symbol } }).then(function(dbStock) {
+      res.json(dbStock);
+    });
   })
 };
