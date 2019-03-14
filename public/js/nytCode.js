@@ -19,7 +19,7 @@ function updatePage(newsAPI) {
   // var numArticles = $("#article-count").val(); 
 
   // Log the newsAPI to console, where it will show up as an object
-  console.log(newsAPI);
+  // console.log(newsAPI);
   console.log("------------------------------------");
 
   // Loop through and build elements for the defined number of articles
