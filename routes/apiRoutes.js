@@ -21,4 +21,9 @@ module.exports = function(app) {
       res.json(dbExample);
     });
   });
+
+  // search for company name by stock symbol
+  app.get("/api/stock/:symbol", function(req, res) {
+
+  })
 };
