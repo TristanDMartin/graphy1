@@ -1,11 +1,13 @@
 module.exports = function(sequelize, DataTypes) {
-    var Stock = sequelize.define("Stock", {
+    var Stock_master = sequelize.define("Stock_master", {
       symbol: DataTypes.STRING,
       name: DataTypes.STRING,
-      IPOyear: DataTypes.INTEGER,
-      sector: DataTypes.STRING,
-      industry: DataTypes.STRING
-    });
-    return Stock;
+      search_term: DataTypes.STRING 
+    },{
+      timestamps: false,
+      freezeTableName: true
+    }
+    );
+    return Stock_master;
   };
   

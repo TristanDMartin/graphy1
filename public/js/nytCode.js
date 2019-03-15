@@ -1,7 +1,6 @@
-function buildQueryURL() {
+function buildQueryURL(querySearch) {
 
   var queryAPI = "ac6789edc5834e9c95d6ee57b3ac79dd";
-  var querySearch = $("#search-term").val().split(' ').join("+").toLowerCase();
   console.log(querySearch);
 
   // queryURL is the url we'll use to query the API
@@ -9,7 +8,11 @@ function buildQueryURL() {
 
   console.log(queryURL);
 
-  return queryURL;
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  })
+    .then(updatePage);
 }
 
 
@@ -97,6 +100,14 @@ function clear() {
   $("#article-section").empty();
 }
 
+// Get name from symbol
+function getName(symbol){
+    return $.ajax({
+      url: "api/stocks/" + symbol,
+      type: "GET"
+  });
+}
+
 // CLICK HANDLERS
 // ==========================================================
 
@@ -106,22 +117,23 @@ $("#run-search").on("click", function (event) {
   // This way we can hit enter on the keyboard and it registers the search
   // (in addition to clicks). Prevents the page from reloading on form submit.
   event.preventDefault();
+  getChartURL();
+  // // Empty the region associated with the articles
+  // clear();
 
-  // Empty the region associated with the articles
-  clear();
+  // // Build the query URL for the ajax request to the NYT API
+  // var queryURL = buildQueryURL();
 
-  // Build the query URL for the ajax request to the NYT API
-  var queryURL = buildQueryURL();
+  // console.log("In Run search CLICK EVENT");
 
-  console.log("In Run search CLICK EVENT");
-
-  // Make the AJAX request to the API - GETs the JSON data at the queryURL.
-  // The data then gets passed as an argument to the updatePage function
-  $.ajax({
-    url: queryURL,
-    method: "GET"
-  })
-    .then(updatePage);
+  // // Make the AJAX request to the API - GETs the JSON data at the queryURL.
+  // // The data then gets passed as an argument to the updatePage function
+  
+  var test = $("#search-term").val().split(' ').join("+").toLowerCase();
+  getName(test).then( (data) => {
+    var fixString = data[0].search_term.split(' ').join("+").toLowerCase();
+    buildQueryURL(fixString);
+  });
 
 });
 

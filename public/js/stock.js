@@ -1,5 +1,5 @@
 //query strings, urls, ajax, and such
-function buildQueryURL() {
+function getChartURL() {
 
     var queryAPI = "ac6789edc5834e9c95d6ee57b3ac79dd";
     var querySearch = $("#search-term").val().split(' ').join("+").toLowerCase();
@@ -90,7 +90,7 @@ function makeGraph(obj){
 }
 
 //on click event
-$("#run-search").on("click", function (event) {
+$("#chart").on("click", function (event) {
     event.preventDefault();
-    buildQueryURL();
+    getURL();
 });
