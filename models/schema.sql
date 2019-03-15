@@ -7,3 +7,11 @@ CREATE DATABASE testdb;
 USE exampledb;
 
 SELECT * FROM stocks;
+
+CREATE TABLE stock_master (
+	id INT AUTO_INCREMENT,
+    symbol VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    search_term VARCHAR(255) NOT NULL DEFAULT "",
+    PRIMARY KEY (id)
+);
