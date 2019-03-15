@@ -1,33 +1,322 @@
-<div id="home">
-  <div class="container">
-    <div class="row">
-      <div class="col-8 offset-2">
-        <h1>{{msg}}</h1>
-        <h2>Graphy |</h2>
-        <form class="clearfix mb-4" action="POST">
-          <div class="form-group">
-            <label for="example-text">Example Text</label>
-            <input type="text" id="example-text" class="form-control" aria-describedby="example-text" placeholder="Enter Example Text">
-          </div>
-          <div class="form-group">
-            <label for="example-description">Example Description</label>
-            <textarea class="form-control" id="example-description" aria-describedby="example-description" placeholder="Enter Example Description"></textarea>
-          </div>
-          <button id="submit" class="btn btn-primary float-right">Submit</button>
-        </form>
-        <h3>Examples:</h3>
-        <ul id="example-list" class="list-group">
-          {{#each examples}}
-          <li data-id="{{this.id}}" class="list-group-item">
-            <a href="example/{{this.id}}">{{this.text}}</a>
-            <button class="btn btn-danger float-right delete">ｘ</button>
-          </li>
-          {{/each}}
-        </ul>
-      </div>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" href="#">Fixed navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+      <!-- <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li> -->
+      <li class="nav-item">
+        <a class="nav-link" href="#">Profile</a>
+      </li>
+      <!-- <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Disabled</a>
+                </li> -->
+      <ul class="dropdown-menu">
+        <li align="center" class="well">
+          <div><img class="img-responsive" style="padding:2%;" src="http://placehold.it/120x120" /><a class="change"
+              href="">Change Picture</a></div>
+          <a href="#" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-lock"></span>
+            Security</a>
+          <a href="#" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-log-out"></span>
+            Logout</a>
+        </li>
+      </ul>
+    </ul>
+  </div>
+</nav>
+
+
+
+
+<!-- adding widget into space -->
+<section>
+  <div class="col-md-12">
+    <!-- TradingView Widget BEGIN -->
+    <div class="tradingview-widget-container">
+      <div class="tradingview-widget-container__widget"></div>
+      <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com" rel="noopener" target="_blank"><span
+            class="blue-text"></span></a> </div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js"
+        async>
+          {
+            "symbols": [
+              {
+                "title": "S&P 500",
+                "proName": "INDEX:SPX"
+              },
+              {
+                "title": "Shanghai Composite",
+                "proName": "INDEX:XLY0"
+              },
+              {
+                "title": "EUR/USD",
+                "proName": "FX_IDC:EURUSD"
+              },
+              {
+                "title": "BTC/USD",
+                "proName": "BITFINEX:BTCUSD"
+              },
+              {
+                "title": "ETH/USD",
+                "proName": "BITFINEX:ETHUSD"
+              }
+            ],
+              "theme": "dark",
+                "isTransparent": false,
+                  "displayMode": "adaptive",
+                    "locale": "en"
+          }
+        </script>
     </div>
   </div>
-</div>
+  <!-- TradingView Widget END -->
+</section>
+<!-- placeholder for graph  -->
+<main role="main" class="container">
+  <!-- CHART HTML (see script at bottom) -->
+  <div id="chart_div"></div>
+  <!-- CHART HTML (see script at bottom) -->
+</main>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<section>
+  <!-- adding in lucas/mikes information -->
+  <!-- Main Bootstrap Search -->
+  <div class="container">
+
+    <!-- Jumbotron for Title
+            {{!-- <div class="jumbotron" style="background-color: #20315A ; color: white;">
+                <h1 class="text-center">
+                    <strong>
+                        <i class="fa fa-newspaper-o"></i> New York Times Search</strong>
+                </h1>
+            </div> --}} -->
+
+    <!-- CHART HTML (see script at bottom) -->
+    <div id="chart_div"></div>
+    <!-- CHART HTML (see script at bottom) -->
+
+    <!-- Row for Searching New York Times -->
+    <div class="row">
+      <div class="col-sm-12">
+        <br>
+        <!-- First card is for handling the search parameters -->
+        <div class="card">
+          <div class="card-header">
+            <strong>
+              <i class="fa fa-list-alt"></i> Search Parameters</strong>
+          </div>
+          <div class="card-body">
+
+            <!-- Here we create an HTML Form for handling the inputs-->
+            <form role="form">
+
+              <!-- Here we create the text box for capturing the search term-->
+              <div class="form-group">
+                <label for="search">Search Term:</label>
+                <input type="text" class="form-control" id="search-term">
+              </div>
+
+              <!-- Here we have our final submit button -->
+              <button type="submit" class="btn btn-default" id="run-search">
+                <i class="fa fa-search"></i> Search</button>
+              <button class="btn btn-default" id="clear-all">
+                <i class="fa fa-trash"></i> Clear Results</button>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- This row will handle all of the retrieved articles -->
+    <div class="row">
+      <div class="col-sm-12">
+        <br>
+
+        <!-- This card will initially be made up of a card and wells for each of the articles retrieved -->
+        <div class="card">
+
+          <!-- card Heading for the retrieved articles box -->
+          <div class="card-header">
+            <strong>
+              <i class="fa fa-table"></i> Top Articles</strong>
+          </div>
+
+          <!-- This main card will hold each of the resulting articles -->
+          <div class="card-body" id="article-section">
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- finished add-on for mike/lucas information -->
+</section>
+<div class="container">
+  <!-- Example row of columns -->
+  <div class="row">
+    <div class="col-md-4">
+      <h2></h2>
+      <p>
+        <!-- TradingView Widget BEGIN -->
+        <div class="tradingview-widget-container">
+          <div id="tv-medium-widget"></div>
+          <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/AAPL/" rel="noopener"
+              target="_blank"><span class="blue-text"></span></a> <a href="https://www.tradingview.com/symbols/GOOGL/"
+              rel="noopener" target="_blank"><span class="blue-text"></span></a> <span class="blue-text"></span>
+            <a href="https://www.tradingview.com/symbols/MSFT/" rel="noopener" target="_blank"><span class="blue-text"></span></a></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+          <script type="text/javascript">
+            new TradingView.MediumWidget(
+              {
+                "container_id": "tv-medium-widget",
+                "symbols": [
+                  [
+                    "Apple",
+                    "AAPL "
+                  ],
+                  [
+                    "Google",
+                    "GOOGL"
+                  ],
+                  [
+                    "Microsoft",
+                    "MSFT"
+                  ]
+                ],
+                "greyText": "Quotes by",
+                "gridLineColor": "#e9e9ea",
+                "fontColor": "#83888D",
+                "underLineColor": "#dbeffb",
+                "trendLineColor": "#4bafe9",
+                "width": "350px",
+                "height": "350px",
+                "locale": "en"
+              }
+            );
+          </script>
+        </div>
+        <!-- TradingView Widget END -->
+      </p>
+      <!-- <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p> -->
+    </div>
+    <div class="col-md-4">
+      <h2></h2>
+      <p>
+        <!-- TradingView Widget BEGIN -->
+        <div class="tradingview-widget-container">
+          <div class="tradingview-widget-container__widget"></div>
+          <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/FX-EURUSD/" rel="noopener"
+              target="_blank"><span class="blue-text"></span></a></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js"
+            async>
+              {
+                "symbol": "FX:EURUSD",
+                  "width": "350",
+                    "height": "350",
+                      "locale": "en",
+                        "dateRange": "1y",
+                          "colorTheme": "light",
+                            "trendLineColor": "#37a6ef",
+                              "underLineColor": "#e3f2fd",
+                                "isTransparent": false,
+                                  "autosize": false,
+                                    "largeChartUrl": ""
+              }
+            </script>
+        </div>
+        <!-- TradingView Widget END -->
+
+      </p>
+      <!-- <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p> -->
+    </div>
+    <div class="col-md-4">
+      <h2></h2>
+      <p>
+        <!-- TradingView Widget BEGIN -->
+        <div class="tradingview-widget-container">
+          <div class="tradingview-widget-container__widget"></div>
+          <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/markets/stocks-usa/market-movers-gainers/"
+              rel="noopener" target="_blank"><span class="blue-text"></span></a></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-hotlists.js"
+            async>
+              {
+                "exchange": "US",
+                  "showChart": false,
+                    "locale": "en",
+                      "largeChartUrl": "",
+                        "width": "350",
+                          "height": "350"
+              }
+            </script>
+        </div>
+        <!-- TradingView Widget END -->
+
+      </p>
+      <!-- <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p> -->
+    </div>
+  </div>
+
+
+</div> <!-- /container -->
+
+
+<!-- starting content for content -->
+<section>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+    dolore magna aliqua. Diam vulputate ut pharetra sit amet aliquam. Montes nascetur ridiculus mus mauris
+    vitae ultricies leo. Integer enim neque volutpat ac tincidunt. Nunc mattis enim ut tellus elementum
+    sagittis vitae. Pellentesque pulvinar pellentesque habitant morbi tristique senectus et. Proin nibh nisl
+    condimentum id venenatis a condimentum vitae. At tellus at urna condimentum mattis pellentesque id nibh.
+    Fames ac turpis egestas integer. Mattis molestie a iaculis at. Augue neque gravida in fermentum et
+    sollicitudin ac orci.</p>
+
+  <p>Porta nibh venenatis cras sed felis. Praesent tristique magna sit amet purus. Feugiat vivamus at augue eget
+    arcu dictum varius duis at. Odio facilisis mauris sit amet massa vitae tortor condimentum. Ipsum consequat
+    nisl vel pretium lectus. Netus et malesuada fames ac. Ipsum dolor sit amet consectetur adipiscing elit.
+    Tincidunt praesent semper feugiat nibh sed. Vel pharetra vel turpis nunc eget lorem dolor sed. Sagittis id
+    consectetur purus ut faucibus pulvinar elementum. Sagittis purus sit amet volutpat consequat mauris nunc
+    congue nisi. Convallis posuere morbi leo urna molestie at elementum eu.</p>
+
+  <p>Malesuada fames ac turpis egestas. Malesuada fames ac turpis egestas integer eget aliquet. Morbi quis
+    commodo odio aenean sed adipiscing diam donec adipiscing. Cursus in hac habitasse platea dictumst quisque
+    sagittis purus sit. Orci phasellus egestas tellus rutrum tellus pellentesque. Placerat in egestas erat
+    imperdiet sed euismod nisi porta. Aliquet risus feugiat in ante metus dictum at. Vitae ultricies leo
+    integer malesuada nunc vel. Mauris sit amet massa vitae tortor. Cras pulvinar mattis nunc sed. Turpis massa
+
+</section>
+
+
+
+
+<section></section>
+
+<footer class="footer mt-auto py-3">
+  <div class="container">
+    <span class="text-muted">@Copy Right</span>
+  </div>
+</footer>
+
+
+<!-- Javascript links -->
+<script src="/js/nytCode.js"></script>
+<!-- CHART SCRIPT -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="/js/stock.js"></script>
 <script src="/js/index.js"></script>
+<!-- CHART SCRIPT -->
+
+<!-- Bootstrap links -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+  crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+  crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+  crossorigin="anonymous"></script>
+<!-- main links -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
