@@ -84,13 +84,27 @@ function makeGraph(obj){
         };
 
         var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        google.visualization.events.addListener(chart, 'select', selectHandler);
 
         chart.draw(data, options);
     }
 }
 
-//on click event
+//ON CLICK EVENTS
 $("#chart").on("click", function (event) {
     event.preventDefault();
     getURL();
 });
+
+function selectHandler(e) {
+    alert('A table row was selected');
+    $(".modal").css("display","block");
+}
+
+$("#submit-pin").on("click", (e) => {
+    $(".modal").css("display","none");
+})
+
+$("#close-pin").on("click", (e) => {
+    $(".modal").css("display","none");
+})
