@@ -1,3 +1,13 @@
+DROP TABLE IF EXISTS stock_master;
+CREATE TABLE stock_master (
+	id INT AUTO_INCREMENT,
+    symbol VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    search_term VARCHAR(255) NOT NULL DEFAULT "",
+    PRIMARY KEY (id)
+);
+
+
 INSERT INTO stock_master (symbol, name) VALUES ('YI', '111, Inc.') ;
 INSERT INTO stock_master (symbol, name) VALUES ('PIH', '1347 Property Insurance Holdings, Inc.') ;
 INSERT INTO stock_master (symbol, name) VALUES ('PIHPP', '1347 Property Insurance Holdings, Inc.') ;
@@ -3464,6 +3474,7 @@ INSERT INTO stock_master (symbol, name) VALUES ('ZYNE', 'Zynerba Pharmaceuticals
 INSERT INTO stock_master (symbol, name) VALUES ('ZYXI', 'Zynex, Inc.') ;
 INSERT INTO stock_master (symbol, name) VALUES ('ZNGA', 'Zynga Inc.') ;
 
+-- SELECT * FROM stock_master WHERE name REGEXP ("micro");
 UPDATE stock_master SET search_term = name;
 UPDATE stock_master SET search_term = REPLACE(search_term, ", Inc.", "");
 UPDATE stock_master SET search_term = REPLACE(search_term, " Inc.", "");
@@ -3473,4 +3484,7 @@ UPDATE stock_master SET search_term = REPLACE(search_term, " Micro-Cap ETF", "")
 UPDATE stock_master SET search_term = REPLACE(search_term, " Limited", "");
 UPDATE stock_master SET search_term = REPLACE(search_term, " LLC", "");
 UPDATE stock_master SET search_term = REPLACE(search_term, " Technology", "");
-SELECT * FROM stock_master WHERE name REGEXP ("alphabet");
+UPDATE stock_master SET search_term = REPLACE(search_term, " Company", "");
+UPDATE stock_master SET search_term = REPLACE(search_term, "The ", "");
+UPDATE stock_master SET search_term = REPLACE(search_term, " Corp.", "");
+SELECT * FROM stock_master;

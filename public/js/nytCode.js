@@ -1,15 +1,24 @@
-function buildQueryURL() {
+function getHeadlines() {
 
-  var queryAPI = "ac6789edc5834e9c95d6ee57b3ac79dd";
   var querySearch = $("#search-term").val().split(' ').join("+").toLowerCase();
   console.log(querySearch);
 
   // queryURL is the url we'll use to query the API
-  var queryURL = "https://newsapi.org/v2/top-headlines?q=" + querySearch + "&apiKey=" + queryAPI;
 
-  console.log(queryURL);
+  //CREATE A CUSTOM AJAX CALL TO GRAB THE APIKEY CALL IN API ROUTES 
+  //THIS WILL GRAB THE API KEY 
 
-  return queryURL;
+  $.ajax({
+    url: "/api/top-headlines/q/" + querySearch,
+    method: "GET"
+  })
+    .then((result) => {
+      console.log(result);
+      updatePage(result);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
 
 
@@ -54,6 +63,9 @@ function updatePage(newsAPI) {
         "</strong>"
       );
     }
+    else {
+      headline = "No Title";
+    }
 
     // If the article has a byline, log and append to $articleList
     // var byline = article.byline;
@@ -74,14 +86,15 @@ function updatePage(newsAPI) {
     var publishedDate = article.publishedAt;
     console.log(article.publishedAt);
 
-    publishedDate = moment(publishedDate).calendar();
-    console.log("NEW MOMENT DATE/TIME: " + publishedDate);
-
-    // console.log(moment("2019-03-11T21:08:43Z").calendar());
-
     if (publishedDate) {
+      publishedDate = moment(publishedDate).calendar();
+      console.log("NEW MOMENT DATE/TIME: " + publishedDate);
       $articleListItem.append("<h5>" + publishedDate + "</h5>");
     }
+    else{
+      publishedDate = "Cannot find published date.";
+    }
+
 
     // Append and log url
     $articleListItem.append("<a href='" + article.url + "'>URL Here!</a>");
@@ -97,33 +110,25 @@ function clear() {
   $("#article-section").empty();
 }
 
+// Get name from symbol
+function getName(symbol) {
+  return $.ajax({
+    url: "api/stocks/" + symbol,
+    type: "GET"
+  });
+}
+
 // CLICK HANDLERS
 // ==========================================================
 
 // .on("click") function associated with the Search Button
-$("#run-search").on("click", function (event) {
-  // This line allows us to take advantage of the HTML "submit" property
-  // This way we can hit enter on the keyboard and it registers the search
-  // (in addition to clicks). Prevents the page from reloading on form submit.
-  event.preventDefault();
-
-  // Empty the region associated with the articles
-  clear();
-
-  // Build the query URL for the ajax request to the NYT API
-  var queryURL = buildQueryURL();
-
-  console.log("In Run search CLICK EVENT");
-
-  // Make the AJAX request to the API - GETs the JSON data at the queryURL.
-  // The data then gets passed as an argument to the updatePage function
-  $.ajax({
-    url: queryURL,
-    method: "GET"
-  })
-    .then(updatePage);
-
-});
+// $("#run-search").on("click", function (event) {
+//   // This line allows us to take advantage of the HTML "submit" property
+//   // This way we can hit enter on the keyboard and it registers the search
+//   // (in addition to clicks). Prevents the page from reloading on form submit.
+//   event.preventDefault();
+  
+// });
 
 //  .on("click") function associated with the clear button
 $("#clear-all").on("click", clear);

@@ -1,46 +1,42 @@
 //query strings, urls, ajax, and such
-function buildQueryURL() {
+function getStockChart() {
 
-    var queryAPI = "ac6789edc5834e9c95d6ee57b3ac79dd";
     var querySearch = $("#search-term").val().split(' ').join("+").toLowerCase();
-    console.log(querySearch);
-  
-    // queryURL is the url we'll use to query the API
-    var queryURL = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + querySearch + "&apikey=83VRQDZG4I1R308O";
-  
-    console.log(queryURL);
-  
+    console.log("ASJDLASLDJHASJDHASJDHASKJD" + querySearch);
+
+
     $.ajax({
-        url: queryURL,
+        url: "/api/time-series-daily/q/" + querySearch,
         method: "GET"
-      })
-        .done(makeGraph);
+    })
+        .then((result) => {
+            makeGraph(result);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
 }
 
-// graph, arrays, complicated stuff (obj = ajax call response)
-function makeGraph(obj){
+function makeGraph(obj) {
 
     //Stock object
-    var priceArr = [];
 
     var values = obj["Time Series (Daily)"];
+    console.log("OBJECCTTTTT: " + JSON.stringify(obj));
     console.log(values[moment().subtract(1, "days").format("YYYY-MM-DD")]);
 
     $("#chart-div").empty();
-
-    // Stock.openArr = [2,3];
-    // Stock.closeArr = [0,1];
 
     var x = [];
     var rowsArr = [];
     var dateArr = [];
     var openArr = [];
     var closeArr = [];
-    for(var i=0; i<30; i++){
+    for (var i = 0; i < 30; i++) {
         var day = moment().subtract(i, "days").format("YYYY-MM-DD");
 
         //fillout undefined values
-        if(values[day] === undefined){
+        if (values[day] === undefined) {
             dateArr.unshift(moment().subtract(i, "days").toDate());
             openArr.unshift(parseFloat(x["1. open"]));
             closeArr.unshift(parseFloat(x["4. close"]));
@@ -55,7 +51,7 @@ function makeGraph(obj){
     }
     console.log(rowsArr);
 
-    google.charts.load('current', {packages: ['corechart', 'line']});
+    google.charts.load('current', { packages: ['corechart', 'line'] });
     google.charts.setOnLoadCallback(drawBasic);
 
     function drawBasic() {
@@ -75,12 +71,12 @@ function makeGraph(obj){
         data.addRows(rowsArr);
 
         var options = {
-        hAxis: {
-            title: 'Time'
-        },
-        vAxis: {
-            title: 'Popularity'
-        }
+            hAxis: {
+                title: 'Time'
+            },
+            vAxis: {
+                title: 'Popularity'
+            }
         };
 
         var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
@@ -89,8 +85,11 @@ function makeGraph(obj){
     }
 }
 
+console.log("read stock.js");
 //on click event
 $("#run-search").on("click", function (event) {
     event.preventDefault();
-    buildQueryURL();
+    getStockChart();
+    console.log("my onclick");
+    getHeadlines();
 });
