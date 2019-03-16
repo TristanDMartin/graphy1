@@ -1,3 +1,9 @@
+//need these as globals for chart onclick event
+var chart;
+var dateArr = [];
+var openArr = [];
+var closeArr = [];
+
 //query strings, urls, ajax, and such
 function getChartURL() {
 
@@ -33,9 +39,7 @@ function makeGraph(obj){
 
     var x = [];
     var rowsArr = [];
-    var dateArr = [];
-    var openArr = [];
-    var closeArr = [];
+
     for(var i=0; i<30; i++){
         var day = moment().subtract(i, "days").format("YYYY-MM-DD");
 
@@ -83,7 +87,7 @@ function makeGraph(obj){
         }
         };
 
-        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart = new google.visualization.LineChart(document.getElementById('chart_div'));
         google.visualization.events.addListener(chart, 'select', selectHandler);
 
         chart.draw(data, options);
@@ -97,7 +101,20 @@ $("#chart").on("click", function (event) {
 });
 
 function selectHandler(e) {
-    alert('A table row was selected');
+    var selection = chart.getSelection();
+    var openOrClose;
+    var string;
+    if(selection[0].column===1){
+        openOrClose = openArr;
+        string = "OPEN: ";
+    } else if(selection[0].column===2){
+        openOrClose = closeArr;
+        string = "CLOSE: ";
+    }
+    console.log({
+        Date:  dateArr[selection[0].row],
+        Value: string + openOrClose[selection[0].column]
+    });
     $(".modal").css("display","block");
 }
 
