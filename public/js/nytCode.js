@@ -1,18 +1,37 @@
+
+function getHeadlines() {
+
+  var querySearch = $("#search-term").val().split(' ').join("+").toLowerCase();
+
 function buildQueryURL(querySearch) {
 
   var queryAPI = "ac6789edc5834e9c95d6ee57b3ac79dd";
+
   console.log(querySearch);
 
   // queryURL is the url we'll use to query the API
-  var queryURL = "https://newsapi.org/v2/top-headlines?q=" + querySearch + "&apiKey=" + queryAPI;
 
-  console.log(queryURL);
+  //CREATE A CUSTOM AJAX CALL TO GRAB THE APIKEY CALL IN API ROUTES 
+  //THIS WILL GRAB THE API KEY 
 
   $.ajax({
+
+    url: "/api/top-headlines/q/" + querySearch,
+    method: "GET"
+  })
+    .then((result) => {
+      console.log(result);
+      updatePage(result);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
     url: queryURL,
     method: "GET"
   })
     .then(updatePage);
+
 }
 
 
@@ -57,6 +76,9 @@ function updatePage(newsAPI) {
         "</strong>"
       );
     }
+    else {
+      headline = "No Title";
+    }
 
     // If the article has a byline, log and append to $articleList
     // var byline = article.byline;
@@ -77,14 +99,15 @@ function updatePage(newsAPI) {
     var publishedDate = article.publishedAt;
     console.log(article.publishedAt);
 
-    publishedDate = moment(publishedDate).calendar();
-    console.log("NEW MOMENT DATE/TIME: " + publishedDate);
-
-    // console.log(moment("2019-03-11T21:08:43Z").calendar());
-
     if (publishedDate) {
+      publishedDate = moment(publishedDate).calendar();
+      console.log("NEW MOMENT DATE/TIME: " + publishedDate);
       $articleListItem.append("<h5>" + publishedDate + "</h5>");
     }
+    else{
+      publishedDate = "Cannot find published date.";
+    }
+
 
     // Append and log url
     $articleListItem.append("<a href='" + article.url + "'>URL Here!</a>");
@@ -101,10 +124,17 @@ function clear() {
 }
 
 // Get name from symbol
+
+function getName(symbol) {
+  return $.ajax({
+    url: "api/stocks/" + symbol,
+    type: "GET"
+
 function getName(symbol){
     return $.ajax({
       url: "api/stocks/" + symbol,
       type: "GET"
+
   });
 }
 
@@ -112,6 +142,15 @@ function getName(symbol){
 // ==========================================================
 
 // .on("click") function associated with the Search Button
+
+// $("#run-search").on("click", function (event) {
+//   // This line allows us to take advantage of the HTML "submit" property
+//   // This way we can hit enter on the keyboard and it registers the search
+//   // (in addition to clicks). Prevents the page from reloading on form submit.
+//   event.preventDefault();
+  
+// });
+
 $("#run-search").on("click", function (event) {
   // This line allows us to take advantage of the HTML "submit" property
   // This way we can hit enter on the keyboard and it registers the search
@@ -136,6 +175,7 @@ $("#run-search").on("click", function (event) {
   });
 
 });
+
 
 //  .on("click") function associated with the clear button
 $("#clear-all").on("click", clear);
