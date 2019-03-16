@@ -1,6 +1,12 @@
+
 function getHeadlines() {
 
   var querySearch = $("#search-term").val().split(' ').join("+").toLowerCase();
+
+function buildQueryURL(querySearch) {
+
+  var queryAPI = "ac6789edc5834e9c95d6ee57b3ac79dd";
+
   console.log(querySearch);
 
   // queryURL is the url we'll use to query the API
@@ -9,6 +15,7 @@ function getHeadlines() {
   //THIS WILL GRAB THE API KEY 
 
   $.ajax({
+
     url: "/api/top-headlines/q/" + querySearch,
     method: "GET"
   })
@@ -19,6 +26,12 @@ function getHeadlines() {
     .catch((error) => {
       console.log(error);
     });
+
+    url: queryURL,
+    method: "GET"
+  })
+    .then(updatePage);
+
 }
 
 
@@ -111,10 +124,17 @@ function clear() {
 }
 
 // Get name from symbol
+
 function getName(symbol) {
   return $.ajax({
     url: "api/stocks/" + symbol,
     type: "GET"
+
+function getName(symbol){
+    return $.ajax({
+      url: "api/stocks/" + symbol,
+      type: "GET"
+
   });
 }
 
@@ -122,6 +142,7 @@ function getName(symbol) {
 // ==========================================================
 
 // .on("click") function associated with the Search Button
+
 // $("#run-search").on("click", function (event) {
 //   // This line allows us to take advantage of the HTML "submit" property
 //   // This way we can hit enter on the keyboard and it registers the search
@@ -129,6 +150,32 @@ function getName(symbol) {
 //   event.preventDefault();
   
 // });
+
+$("#run-search").on("click", function (event) {
+  // This line allows us to take advantage of the HTML "submit" property
+  // This way we can hit enter on the keyboard and it registers the search
+  // (in addition to clicks). Prevents the page from reloading on form submit.
+  event.preventDefault();
+  getChartURL();
+  // // Empty the region associated with the articles
+  // clear();
+
+  // // Build the query URL for the ajax request to the NYT API
+  // var queryURL = buildQueryURL();
+
+  // console.log("In Run search CLICK EVENT");
+
+  // // Make the AJAX request to the API - GETs the JSON data at the queryURL.
+  // // The data then gets passed as an argument to the updatePage function
+  
+  var test = $("#search-term").val().split(' ').join("+").toLowerCase();
+  getName(test).then( (data) => {
+    var fixString = data[0].search_term.split(' ').join("+").toLowerCase();
+    buildQueryURL(fixString);
+  });
+
+});
+
 
 //  .on("click") function associated with the clear button
 $("#clear-all").on("click", clear);

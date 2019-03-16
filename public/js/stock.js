@@ -1,5 +1,9 @@
 //query strings, urls, ajax, and such
+
 function getStockChart() {
+
+function getChartURL() {
+
 
     var querySearch = $("#search-term").val().split(' ').join("+").toLowerCase();
     console.log("ASJDLASLDJHASJDHASJDHASKJD" + querySearch);
@@ -87,9 +91,13 @@ function makeGraph(obj) {
 
 console.log("read stock.js");
 //on click event
-$("#run-search").on("click", function (event) {
+$("#chart").on("click", function (event) {
     event.preventDefault();
+
     getStockChart();
     console.log("my onclick");
     getHeadlines();
+
+    getURL();
+
 });
