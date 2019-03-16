@@ -28,4 +28,10 @@ module.exports = function(app) {
       res.json(dbStock);
     });
   })
+
+  app.get("/api/search/:search", function(req, res) {
+    db.Stock_master.findAll({ where: {search_term: req.params.search} }).then(function(dbStock) {
+      res.json(dbStock);
+    });
+  })
 };

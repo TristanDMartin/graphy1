@@ -5,14 +5,11 @@ var openArr = [];
 var closeArr = [];
 
 //query strings, urls, ajax, and such
-function getChartURL() {
+function getChartURL(symbol) {
 
-    var queryAPI = "ac6789edc5834e9c95d6ee57b3ac79dd";
-    var querySearch = $("#search-term").val().split(' ').join("+").toLowerCase();
-    console.log(querySearch);
   
     // queryURL is the url we'll use to query the API
-    var queryURL = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + querySearch + "&apikey=83VRQDZG4I1R308O";
+    var queryURL = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + symbol + "&apikey=83VRQDZG4I1R308O";
   
     console.log(queryURL);
   

@@ -108,6 +108,13 @@ function getName(symbol){
   });
 }
 
+function getSearch(symbol){
+  return $.ajax({
+    url: "api/search/" + symbol,
+    type: "GET"
+});
+}
+
 // CLICK HANDLERS
 // ==========================================================
 
@@ -117,7 +124,7 @@ $("#run-search").on("click", function (event) {
   // This way we can hit enter on the keyboard and it registers the search
   // (in addition to clicks). Prevents the page from reloading on form submit.
   event.preventDefault();
-  getChartURL();
+  
   // // Empty the region associated with the articles
   // clear();
 
@@ -128,11 +135,21 @@ $("#run-search").on("click", function (event) {
 
   // // Make the AJAX request to the API - GETs the JSON data at the queryURL.
   // // The data then gets passed as an argument to the updatePage function
-  
-  var test = $("#search-term").val().split(' ').join("+").toLowerCase();
-  getName(test).then( (data) => {
-    var fixString = data[0].search_term.split(' ').join("+").toLowerCase();
+
+
+  //get from symbol
+  // var test = $("#search-term").val().split(' ').join("+").toLowerCase();
+  // getName(test).then( (data) => {
+  //   var fixString = data[0].search_term.split(' ').join("+").toLowerCase();
+  //   buildQueryURL(fixString);
+  // });
+  //get from search_term
+  var test = $("#search-term").val()
+  getSearch(test).then( (data) => {
+    var fixString = data[0].search_term;
+    var symbol = data[0].symbol;
     buildQueryURL(fixString);
+    getChartURL(symbol);
   });
 
 });
