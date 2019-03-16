@@ -3,9 +3,11 @@
 
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-        crossorigin="anonymous">
-    <link rel="stylesheet" href="styles/styles.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/login.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
     <title>Graphy | Login</title>
 </head>
 
@@ -14,22 +16,50 @@
 
 
     <section>
-        <form class="form-signin">
-            <img class="mb-4" src="{{ site.baseurl }}/docs/{{ site.docs_version }}/assets/brand/bootstrap-solid.svg"
-                alt="" width="72" height="72">
-            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-            <label for="inputEmail" class="sr-only">Email address</label>
-            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-            <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-            <div class="checkbox mb-3">
-                <label>
-                    <input type="checkbox" value="remember-me"> Remember me
-                </label>
+        <div class="container">
+            <form action="/action_page.php">
+                <div class="row">
+                    <h2 style="text-align:center">Login with Social Media or Manually</h2>
+                    <div class="vl">
+                        <span class="vl-innertext">or</span>
+                    </div>
+
+                    <div class="col">
+                        <a href="#" class="fb btn">
+                            <i class="fa fa-facebook fa-fw"></i> Login with Facebook
+                        </a>
+                        <a href="#" class="twitter btn">
+                            <i class="fa fa-twitter fa-fw"></i> Login with Twitter
+                        </a>
+                        <a href="#" class="google btn"><i class="fa fa-google fa-fw">
+                            </i> Login with Google+
+                        </a>
+                    </div>
+
+                    <div class="col">
+                        <div class="hide-md-lg">
+                            <p>Or sign in manually:</p>
+                        </div>
+
+                        <input type="text" name="username" placeholder="Username" required>
+                        <input type="password" name="password" placeholder="Password" required>
+                        <input type="submit" value="Login">
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+        <div class="bottom-container">
+            <div class="row">
+                <div class="col">
+                    <a href="#" style="color:white" class="btn">Sign up</a>
+                </div>
+                <div class="col">
+                    <a href="#" style="color:white" class="btn">Forgot password?</a>
+                </div>
             </div>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-            <p class="mt-5 mb-3 text-muted">&copy; 2017-{{ site.time | date: "%Y" }}</p>
-        </form>
+        </div>
 
 
     </section>
@@ -53,7 +83,6 @@
         crossorigin="anonymous"></script>
     <!-- main links -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/js/index.js"></script>
 </body>
 
 </html>
