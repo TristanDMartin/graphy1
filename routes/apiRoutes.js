@@ -25,15 +25,14 @@ module.exports = function (app) {
   });
 
   // search for company name by stock symbol
-  app.get("/api/stocks/:symbol", function (req, res) {
+  app.get("/api/tickers/:symbol", function (req, res) {
     db.Stock_master.findAll({ where: { symbol: req.params.symbol } }).then(function (dbStock) {
       res.json(dbStock);
     });
   })
-
-  app.get("/api/search/:search", function(req, res) {
-    console.log(req.params.search);
-    db.Stock_master.findAll({ where: {search_term: req.params.search} }).then(function(dbStock) {
+  //search for company name by search term
+  app.get("/api/search/:search", function (req, res) {
+    db.Stock_master.findAll({ where: { search_term: req.params.search } }).then(function (dbStock) {
       res.json(dbStock);
     });
   });

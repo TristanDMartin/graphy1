@@ -69,16 +69,31 @@ function makeGraph(result) {
         chart.draw(data, options);
     }
 }
-function getStockTicker(stockName) {
+function getStockTicker(searchTerm) {
     $.ajax({
-        url: "api/search/" + stockName,
+        url: "api/search/" + searchTerm,
         type: "GET"
     })
         .then((result) => {
-            var stockName = result[0].search_term;
-            var symbol = result[0].symbol;
-            getStockChart(symbol);
-            getHeadlines(stockName);
+            // console.log("RESULT 1 ----------------------------------" + result[0]);
+            if (result[0]) {
+                var stockName = result[0].search_term;
+                var symbol = result[0].symbol;
+                getStockChart(symbol);
+                getHeadlines(stockName);
+            }
+            else {
+                $.ajax({
+                    url: "/api/tickers/" + searchTerm,
+                    type: "GET"
+                }).then((result) => {
+                    // console.log("RESULT 1 ----------------------------------" + result[0]);
+                    var stockName = result[0].search_term;
+                    var symbol = result[0].symbol;
+                    getStockChart(symbol);
+                    getHeadlines(stockName);
+                })
+            }
         })
         .catch((error) => {
             console.log(error);
@@ -91,6 +106,7 @@ $("#run-search").on("click", function (event) {
     var querySearch = $("#search-term").val().toLowerCase();
     console.log(querySearch);
     getStockTicker(querySearch);
+    $("#article-section").empty();
     $("#search-term").val("");
     $("#search-term").attr("placeholder", querySearch);
 });
