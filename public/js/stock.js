@@ -76,7 +76,6 @@ function getStockTicker(stockName) {
     })
         .then((result) => {
             var stockName = result[0].search_term;
-            console.log("FIX STRING VAR &&&&&&&&&&&&&&&&&&& " + stockName);
             var symbol = result[0].symbol;
             getStockChart(symbol);
             getHeadlines(stockName);
@@ -92,4 +91,10 @@ $("#run-search").on("click", function (event) {
     var querySearch = $("#search-term").val().toLowerCase();
     console.log(querySearch);
     getStockTicker(querySearch);
+    $("#search-term").val("");
+    $("#search-term").attr("placeholder", querySearch);
+});
+
+$("#search-term").on("click", function () {
+    $("#search-term").attr("placeholder", "");
 });
