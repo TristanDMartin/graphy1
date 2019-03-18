@@ -106,12 +106,18 @@ function getStockTicker(searchTerm) {
 //on click event
 $("#run-search").on("click", function (event) {
     event.preventDefault();
-    var querySearch = $("#search-term").val().toLowerCase();
-    console.log(querySearch);
-    getStockTicker(querySearch);
-    $("#article-section").empty();
-    $("#search-term").val("");
-    $("#search-term").attr("placeholder", querySearch);
+    if (querySearch) {
+        var querySearch = $("#search-term").val().toLowerCase();
+        console.log(querySearch);
+        getStockTicker(querySearch);
+        $("#article-section").empty();
+        $("#search-term").val("");
+        $("#search-term").attr("placeholder", querySearch);
+    }
+    else {
+        $("#article-section").text("Please enter a search term.");
+    }
+
 });
 
 $("#search-term").on("click", function () {
