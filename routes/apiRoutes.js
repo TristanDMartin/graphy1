@@ -25,8 +25,13 @@ module.exports = function (app) {
   });
 
   // search for company name by stock symbol
+
   app.get("/api/stocks/:symbol", function (req, res) {
     db.Stock_master.findAll({ where: { symbol: req.params.symbol } }).then(function (dbStock) {
+
+  app.get("/api/stocks/:symbol", function(req, res) {
+    db.Stock_master.findAll({ where: {symbol: req.params.symbol} }).then(function(dbStock) {
+
       res.json(dbStock);
     });
   })
