@@ -1,3 +1,37 @@
+function getStockTicker(searchTerm) {
+    $.ajax({
+        url: "api/search/" + searchTerm,
+        type: "GET"
+    })
+        .then((result) => {
+            if (result[0]) {
+                var stockName = result[0].search_term;
+                var symbol = result[0].symbol;
+                getStockChart(symbol);
+                getHeadlines(stockName);
+            }
+            else {
+                $.ajax({
+                    url: "/api/tickers/" + searchTerm,
+                    type: "GET"
+                }).then((result) => {
+                    if (result[0]) {
+                        var stockName = result[0].search_term;
+                        var symbol = result[0].symbol;
+                        getStockChart(symbol);
+                        getHeadlines(stockName);
+                    }
+                    else {
+                        $("#article-section").text(" Sorry, We could not find any results for the specific search. Please try again. ");
+                    }
+                })
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+}
+
 //query strings, urls, ajax, and such
 function getStockChart(stockName) {
     $.ajax({
@@ -69,39 +103,7 @@ function makeGraph(result) {
         chart.draw(data, options);
     }
 }
-function getStockTicker(searchTerm) {
-    $.ajax({
-        url: "api/search/" + searchTerm,
-        type: "GET"
-    })
-        .then((result) => {
-            if (result[0]) {
-                var stockName = result[0].search_term;
-                var symbol = result[0].symbol;
-                getStockChart(symbol);
-                getHeadlines(stockName);
-            }
-            else {
-                $.ajax({
-                    url: "/api/tickers/" + searchTerm,
-                    type: "GET"
-                }).then((result) => {
-                    if (result[0]) {
-                        var stockName = result[0].search_term;
-                        var symbol = result[0].symbol;
-                        getStockChart(symbol);
-                        getHeadlines(stockName);
-                    }
-                    else {
-                        $("#article-section").text(" Sorry, We could not find any results for the specific search. Please try again. ");
-                    }
-                })
-            }
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-}
+
 
 //on click event
 $("#run-search").on("click", function (event) {

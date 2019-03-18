@@ -92,20 +92,14 @@ function updatePage(result) {
     }
   }
 }
-// =====================================================================================================
-// TICKER SEARCH HERE
-//======================================================================================================
-
-// function getStockByTicker(stockTicker) {
-//   return $.ajax({
-//       url: "/api/stocks/" + stockTicker,
-//       type: "GET"
-//   })
-// }
 // Function to empty out the articles
-function clear() {
-  $("#article-section").empty();
-};
+// function clearUs() {
+//   $("#article-section").empty();
+//   $("#chart_div").empty();
+// };
 
 //  .on("click") function associated with the clear button
-$("#clear-all").on("click", clear);
+$("#clear-all").on("click", function (event) {
+  $("#article-section").empty();
+  $("#chart_div").empty();
+});
