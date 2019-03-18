@@ -32,7 +32,11 @@ module.exports = function (app) {
   })
 
   app.get("/api/top-headlines/q/:term", function (req, res) {
-    https.get('https://newsapi.org/v2/top-headlines?q=' + req.params.term + '&apiKey=' + process.env.newsAPI, (result) => {
+
+
+    // https.get('https://newsapi.org/v2/top-headlines?q=' + req.params.term + '&apiKey=' + process.env.newsAPI, (result) => {
+    https.get('https://newsapi.org/v2/everything?q=' + req.params.term + '&sortBy=popularity&apiKey=' + process.env.newsAPI, (result) => {
+
       let data = '';
 
       // A chunk of data has been recieved.

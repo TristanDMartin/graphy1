@@ -49,11 +49,11 @@ function updatePage(newsAPI) {
 
     // If the article has a headline, log and append to $articleList
     var headline = article.title;
-    console.log("HEADLINE ========= : " + headline);
+    // console.log("HEADLINE ========= : " + headline);
     var $articleListItem = $("<li class='list-group-item articleHeadline'>");
 
-    if (headline) {
-      console.log(headline);
+    if (headline  != ("null" || "undefined")) {
+      // console.log(headline);
       $articleListItem.append(
         "<span class='label label-primary'>" +
         articleCount +
@@ -64,21 +64,25 @@ function updatePage(newsAPI) {
       );
     }
     else {
-      headline = "No Title";
+      headline = "Sorry, No Title";
+      $articleListItem.append(
+        "<span class='label label-primary'>" +
+        articleCount +
+        "</span>" +
+        "<strong> " +
+        headline +
+        "</strong>"
+      );
     }
-
-    // If the article has a byline, log and append to $articleList
-    // var byline = article.byline;
-
-    // if (byline && byline.original) {
-    //   console.log(byline.original);
-    //   $articleListItem.append("<h5>" + byline.original + "</h5>");
-    // }
 
     // Log section, and append to document if exists
     var description = article.description;
     console.log(article.description);
-    if (description) {
+    if (description != ("null" || "undefined")) {
+      $articleListItem.append("<h5>Description: " + description + "</h5>");
+    }
+    else {
+      description = "Sorry, no description found.";
       $articleListItem.append("<h5>Description: " + description + "</h5>");
     }
 
@@ -86,13 +90,14 @@ function updatePage(newsAPI) {
     var publishedDate = article.publishedAt;
     console.log(article.publishedAt);
 
-    if (publishedDate) {
+    if (publishedDate != ("null" || "undefined")) {
       publishedDate = moment(publishedDate).calendar();
       console.log("NEW MOMENT DATE/TIME: " + publishedDate);
       $articleListItem.append("<h5>" + publishedDate + "</h5>");
     }
-    else{
+    else {
       publishedDate = "Cannot find published date.";
+      $articleListItem.append("<h5>" + publishedDate + "</h5>");
     }
 
 
@@ -117,18 +122,6 @@ function getName(symbol) {
     type: "GET"
   });
 }
-
-// CLICK HANDLERS
-// ==========================================================
-
-// .on("click") function associated with the Search Button
-// $("#run-search").on("click", function (event) {
-//   // This line allows us to take advantage of the HTML "submit" property
-//   // This way we can hit enter on the keyboard and it registers the search
-//   // (in addition to clicks). Prevents the page from reloading on form submit.
-//   event.preventDefault();
-  
-// });
 
 //  .on("click") function associated with the clear button
 $("#clear-all").on("click", clear);

@@ -22,7 +22,7 @@ function makeGraph(obj) {
     //Stock object
 
     var values = obj["Time Series (Daily)"];
-    console.log("OBJECCTTTTT: " + JSON.stringify(obj));
+    // console.log("OBJECCTTTTT: " + JSON.stringify(obj));
     console.log(values[moment().subtract(1, "days").format("YYYY-MM-DD")]);
 
     $("#chart-div").empty();
@@ -62,8 +62,6 @@ function makeGraph(obj) {
         data.addColumn('number', 'Close');
 
         //ddd MMM DD YYYY HH:mm:ss
-        // var d1 = new Date(2010, 3, 10);
-        // var d2 = new Date(moment().format("YYYY"), moment().format("D"), moment().format("M"));
         var d1 = moment().subtract(1, "days").toDate();
         var d2 = moment().toDate();
         console.log(d1);
