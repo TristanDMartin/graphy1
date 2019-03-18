@@ -1,16 +1,7 @@
 //query strings, urls, ajax, and such
-
-function getStockChart() {
-
-function getChartURL() {
-
-
-    var querySearch = $("#search-term").val().split(' ').join("+").toLowerCase();
-    console.log("ASJDLASLDJHASJDHASJDHASKJD" + querySearch);
-
-
+function getStockChart(stockName) {
     $.ajax({
-        url: "/api/time-series-daily/q/" + querySearch,
+        url: "/api/time-series-daily/q/" + stockName,
         method: "GET"
     })
         .then((result) => {
@@ -21,13 +12,11 @@ function getChartURL() {
         });
 }
 
-function makeGraph(obj) {
+function makeGraph(result) {
 
     //Stock object
 
-    var values = obj["Time Series (Daily)"];
-    // console.log("OBJECCTTTTT: " + JSON.stringify(obj));
-    console.log(values[moment().subtract(1, "days").format("YYYY-MM-DD")]);
+    var values = result["Time Series (Daily)"];
 
     $("#chart-div").empty();
 
@@ -53,7 +42,7 @@ function makeGraph(obj) {
         //populate array to be added to graph
         rowsArr.unshift([dateArr[0], openArr[0], closeArr[0]])
     }
-    console.log(rowsArr);
+    // console.log(rowsArr);
 
     google.charts.load('current', { packages: ['corechart', 'line'] });
     google.charts.setOnLoadCallback(drawBasic);
@@ -64,12 +53,6 @@ function makeGraph(obj) {
         data.addColumn('date', 'X');
         data.addColumn('number', 'Open');
         data.addColumn('number', 'Close');
-
-        //ddd MMM DD YYYY HH:mm:ss
-        var d1 = moment().subtract(1, "days").toDate();
-        var d2 = moment().toDate();
-        console.log(d1);
-        console.log(d2);
         data.addRows(rowsArr);
 
         var options = {
@@ -86,16 +69,27 @@ function makeGraph(obj) {
         chart.draw(data, options);
     }
 }
+function getStockTicker(stockName) {
+    $.ajax({
+        url: "api/search/" + stockName,
+        type: "GET"
+    })
+        .then((result) => {
+            var stockName = result[0].search_term;
+            console.log("FIX STRING VAR &&&&&&&&&&&&&&&&&&& " + stockName);
+            var symbol = result[0].symbol;
+            getStockChart(symbol);
+            getHeadlines(stockName);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+}
 
-console.log("read stock.js");
 //on click event
-$("#chart").on("click", function (event) {
+$("#run-search").on("click", function (event) {
     event.preventDefault();
-
-    getStockChart();
-    console.log("my onclick");
-    getHeadlines();
-
-    getURL();
-
+    var querySearch = $("#search-term").val().toLowerCase();
+    console.log(querySearch);
+    getStockTicker(querySearch);
 });

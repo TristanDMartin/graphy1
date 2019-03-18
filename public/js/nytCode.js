@@ -1,22 +1,11 @@
-
-function getHeadlines() {
-
-  var querySearch = $("#search-term").val().split(' ').join("+").toLowerCase();
-
-function buildQueryURL(querySearch) {
-
-  var queryAPI = "ac6789edc5834e9c95d6ee57b3ac79dd";
-
-  console.log(querySearch);
-
+function getHeadlines(fixString) {
   // queryURL is the url we'll use to query the API
 
   //CREATE A CUSTOM AJAX CALL TO GRAB THE APIKEY CALL IN API ROUTES 
   //THIS WILL GRAB THE API KEY 
 
   $.ajax({
-
-    url: "/api/top-headlines/q/" + querySearch,
+    url: "/api/everything/q/" + fixString,
     method: "GET"
   })
     .then((result) => {
@@ -26,16 +15,10 @@ function buildQueryURL(querySearch) {
     .catch((error) => {
       console.log(error);
     });
-
-    url: queryURL,
-    method: "GET"
-  })
-    .then(updatePage);
-
 }
 
 
-function updatePage(newsAPI) {
+function updatePage(result) {
   // Get from the form the number of results to display
   // API doesn't have a "limit" parameter, so we have to do this ourselves
   // var numArticles = $("#article-count").val(); 
@@ -47,7 +30,7 @@ function updatePage(newsAPI) {
   // Loop through and build elements for the defined number of articles
   for (var i = 0; i < 5; i++) {
     // Get specific article info for current index
-    var article = newsAPI.articles[i];
+    var article = result.articles[i];
     console.log(article);
 
     // Increase the articleCount (track article # - starting at 1)
@@ -62,11 +45,11 @@ function updatePage(newsAPI) {
 
     // If the article has a headline, log and append to $articleList
     var headline = article.title;
-    // console.log("HEADLINE ========= : " + headline);
+    console.log("HEADLINE ========= : " + headline);
     var $articleListItem = $("<li class='list-group-item articleHeadline'>");
 
-    if (headline  != ("null" || "undefined")) {
-      // console.log(headline);
+    if (headline) {
+      console.log(headline);
       $articleListItem.append(
         "<span class='label label-primary'>" +
         articleCount +
@@ -77,25 +60,13 @@ function updatePage(newsAPI) {
       );
     }
     else {
-      headline = "Sorry, No Title";
-      $articleListItem.append(
-        "<span class='label label-primary'>" +
-        articleCount +
-        "</span>" +
-        "<strong> " +
-        headline +
-        "</strong>"
-      );
+      headline = "No Title";
     }
 
     // Log section, and append to document if exists
     var description = article.description;
     console.log(article.description);
-    if (description != ("null" || "undefined")) {
-      $articleListItem.append("<h5>Description: " + description + "</h5>");
-    }
-    else {
-      description = "Sorry, no description found.";
+    if (description) {
       $articleListItem.append("<h5>Description: " + description + "</h5>");
     }
 
@@ -103,14 +74,13 @@ function updatePage(newsAPI) {
     var publishedDate = article.publishedAt;
     console.log(article.publishedAt);
 
-    if (publishedDate != ("null" || "undefined")) {
+    if (publishedDate) {
       publishedDate = moment(publishedDate).calendar();
       console.log("NEW MOMENT DATE/TIME: " + publishedDate);
       $articleListItem.append("<h5>" + publishedDate + "</h5>");
     }
-    else {
+    else{
       publishedDate = "Cannot find published date.";
-      $articleListItem.append("<h5>" + publishedDate + "</h5>");
     }
 
 
@@ -122,68 +92,20 @@ function updatePage(newsAPI) {
     $articleList.append($articleListItem);
   }
 }
+// =====================================================================================================
+// TICKER SEARCH HERE
+//======================================================================================================
 
+// function getStockByTicker(stockTicker) {
+//   return $.ajax({
+//       url: "/api/stocks/" + stockTicker,
+//       type: "GET"
+//   })
+// }
 // Function to empty out the articles
 function clear() {
   $("#article-section").empty();
-}
+};
 
-// Get name from symbol
-
-function getName(symbol) {
-  return $.ajax({
-    url: "api/stocks/" + symbol,
-    type: "GET"
-
-function getName(symbol){
-    return $.ajax({
-      url: "api/stocks/" + symbol,
-      type: "GET"
-
-  });
-}
-
-<<<<<<< HEAD
-=======
-// CLICK HANDLERS
-// ==========================================================
-
-// .on("click") function associated with the Search Button
-
-// $("#run-search").on("click", function (event) {
-//   // This line allows us to take advantage of the HTML "submit" property
-//   // This way we can hit enter on the keyboard and it registers the search
-//   // (in addition to clicks). Prevents the page from reloading on form submit.
-//   event.preventDefault();
-  
-// });
-
-$("#run-search").on("click", function (event) {
-  // This line allows us to take advantage of the HTML "submit" property
-  // This way we can hit enter on the keyboard and it registers the search
-  // (in addition to clicks). Prevents the page from reloading on form submit.
-  event.preventDefault();
-  getChartURL();
-  // // Empty the region associated with the articles
-  // clear();
-
-  // // Build the query URL for the ajax request to the NYT API
-  // var queryURL = buildQueryURL();
-
-  // console.log("In Run search CLICK EVENT");
-
-  // // Make the AJAX request to the API - GETs the JSON data at the queryURL.
-  // // The data then gets passed as an argument to the updatePage function
-  
-  var test = $("#search-term").val().split(' ').join("+").toLowerCase();
-  getName(test).then( (data) => {
-    var fixString = data[0].search_term.split(' ').join("+").toLowerCase();
-    buildQueryURL(fixString);
-  });
-
-});
-
-
->>>>>>> 8f89edf9ecd29aa857ef83585d7b7b73dc6a94c6
 //  .on("click") function associated with the clear button
 $("#clear-all").on("click", clear);

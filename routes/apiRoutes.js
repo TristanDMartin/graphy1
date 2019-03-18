@@ -25,28 +25,27 @@ module.exports = function (app) {
   });
 
   // search for company name by stock symbol
-
   app.get("/api/stocks/:symbol", function (req, res) {
     db.Stock_master.findAll({ where: { symbol: req.params.symbol } }).then(function (dbStock) {
-
-  app.get("/api/stocks/:symbol", function(req, res) {
-    db.Stock_master.findAll({ where: {symbol: req.params.symbol} }).then(function(dbStock) {
-
       res.json(dbStock);
     });
   })
 
-  app.get("/api/top-headlines/q/:term", function (req, res) {
+  app.get("/api/search/:search", function(req, res) {
+    console.log(req.params.search);
+    db.Stock_master.findAll({ where: {search_term: req.params.search} }).then(function(dbStock) {
+      res.json(dbStock);
+    });
+  });
 
-
-    // https.get('https://newsapi.org/v2/top-headlines?q=' + req.params.term + '&apiKey=' + process.env.newsAPI, (result) => {
+  app.get("/api/everything/q/:term", function (req, res) {
     https.get('https://newsapi.org/v2/everything?q=' + req.params.term + '&sortBy=popularity&apiKey=' + process.env.newsAPI, (result) => {
 
       let data = '';
 
       // A chunk of data has been recieved.
       result.on('data', (chunk) => {
-        console.log(data);
+        // console.log(data);
         data += chunk;
       });
 
@@ -60,15 +59,11 @@ module.exports = function (app) {
   });
 
   app.get("/api/time-series-daily/q/:term", function (req, res) {
-    console.log("IN THE APP GET FOR STOCKS2");
-
     https.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' + req.params.term + '&apikey=' + process.env.stocksAPI, (result) => {
       let data = '';
-      console.log("IN THE APP GET FOR STOCKS");
-
       // A chunk of data has been recieved.
       result.on('data', (chunk) => {
-        console.log(data);
+        // console.log(data);
         data += chunk;
       });
 

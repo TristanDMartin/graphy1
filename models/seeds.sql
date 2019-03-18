@@ -3487,4 +3487,19 @@ UPDATE stock_master SET search_term = REPLACE(search_term, " Technology", "");
 UPDATE stock_master SET search_term = REPLACE(search_term, " Company", "");
 UPDATE stock_master SET search_term = REPLACE(search_term, "The ", "");
 UPDATE stock_master SET search_term = REPLACE(search_term, " Corp.", "");
+UPDATE stock_master SET search_term = REPLACE(search_term, "First Trust ", "");
+UPDATE stock_master SET search_term = REPLACE(search_term, "First ", "");
+UPDATE stock_master SET search_term = REPLACE(search_term, "United ", "");
+UPDATE stock_master SET search_term = REPLACE(search_term, "National ", "");
+UPDATE stock_master SET search_term = REPLACE(search_term, " ETF", "");
+UPDATE stock_master SET search_term = REPLACE(search_term, " International", "");
+UPDATE stock_master SET search_term = REPLACE(search_term, " International ", "");
+UPDATE stock_master SET search_term = REPLACE(search_term, "International", "");
+UPDATE stock_master SET search_term = REPLACE(search_term, " Internet", "");
+UPDATE stock_master SET search_term = REPLACE(search_term, " Internet ", "");
+UPDATE stock_master SET search_term = REPLACE(search_term, "Internet ", "");
+UPDATE stock_master SET search_term = REPLACE(search_term, " Group", "");
+UPDATE stock_master SET search_term = REPLACE(search_term, " Group ", "");
+
+
 SELECT * FROM stock_master;
