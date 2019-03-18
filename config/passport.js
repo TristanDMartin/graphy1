@@ -15,7 +15,7 @@
 
   // used to deserialize the user
   passport.deserializeUser(function(id, done) {
-      User.findById(id).then(function(user) {
+      User.findByPk(id).then(function(user) {
         if(user){
           done(null, user.get());
         }
