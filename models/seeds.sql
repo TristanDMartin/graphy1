@@ -3474,3 +3474,6 @@ UPDATE stock_master SET search_term = REPLACE(search_term, " Limited", "");
 UPDATE stock_master SET search_term = REPLACE(search_term, " LLC", "");
 UPDATE stock_master SET search_term = REPLACE(search_term, " Technology", "");
 SELECT * FROM stock_master WHERE name REGEXP ("alphabet");
+
+USE exampledb;
+SELECT * FROM Stock_master WHERE search_term = "Microsoft";
