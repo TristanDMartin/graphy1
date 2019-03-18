@@ -3500,6 +3500,7 @@ UPDATE stock_master SET search_term = REPLACE(search_term, " Internet ", "");
 UPDATE stock_master SET search_term = REPLACE(search_term, "Internet ", "");
 UPDATE stock_master SET search_term = REPLACE(search_term, " Group", "");
 UPDATE stock_master SET search_term = REPLACE(search_term, " Group ", "");
+UPDATE stock_master SET search_term = REPLACE(search_term, "Alphabet", "Google");
 
 
 SELECT * FROM stock_master;

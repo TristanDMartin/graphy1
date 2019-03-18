@@ -106,8 +106,8 @@ function getStockTicker(searchTerm) {
 //on click event
 $("#run-search").on("click", function (event) {
     event.preventDefault();
+    var querySearch = $("#search-term").val().toLowerCase();
     if (querySearch) {
-        var querySearch = $("#search-term").val().toLowerCase();
         console.log(querySearch);
         getStockTicker(querySearch);
         $("#article-section").empty();
