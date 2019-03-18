@@ -75,7 +75,6 @@ function getStockTicker(searchTerm) {
         type: "GET"
     })
         .then((result) => {
-            // console.log("RESULT 1 ----------------------------------" + result[0]);
             if (result[0]) {
                 var stockName = result[0].search_term;
                 var symbol = result[0].symbol;
@@ -87,11 +86,15 @@ function getStockTicker(searchTerm) {
                     url: "/api/tickers/" + searchTerm,
                     type: "GET"
                 }).then((result) => {
-                    // console.log("RESULT 1 ----------------------------------" + result[0]);
-                    var stockName = result[0].search_term;
-                    var symbol = result[0].symbol;
-                    getStockChart(symbol);
-                    getHeadlines(stockName);
+                    if (result[0]) {
+                        var stockName = result[0].search_term;
+                        var symbol = result[0].symbol;
+                        getStockChart(symbol);
+                        getHeadlines(stockName);
+                    }
+                    else {
+                        $("#article-section").text(" Sorry, We could not find any results for the specific search. Please try again. ");
+                    }
                 })
             }
         })
