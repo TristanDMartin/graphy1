@@ -2,7 +2,7 @@ var db = require("../models");
 const https = require('https');
 
 
-module.exports = function (app) {
+module.exports = function (app, passport) {
   // Get all examples
   app.get("/api/examples", function (req, res) {
     db.Example.findAll({}).then(function (dbExamples) {
@@ -74,4 +74,18 @@ module.exports = function (app) {
       });
     });
   });
+
+  //User routes
+  //Sign in
+  app.post('/signin', passport.authenticate('local-signin', {
+    successRedirect: '/user',
+    failureRedirect: '/signin'
+  }
+  ));
+
+  app.post('/signup', passport.authenticate('local-signup', {
+    successRedirect: '/user',
+    failureRedirect: '/signup'
+  }
+  ));
 };

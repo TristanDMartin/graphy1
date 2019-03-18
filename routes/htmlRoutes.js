@@ -1,9 +1,9 @@
 var db = require("../models");
 
-module.exports = function(app) {
+module.exports = function (app, passport) {
   // Load index page
-  app.get("/", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
+  app.get("/", function (req, res) {
+    db.Example.findAll({}).then(function (dbExamples) {
       res.render("index", {
         // msg: "Welcome!",
         // examples: dbExamples
@@ -12,16 +12,40 @@ module.exports = function(app) {
   });
 
   // Load example page and pass in an example by id
-  app.get("/example/:id", function(req, res) {
-    db.Example.findOne({ where: { id: req.params.id } }).then(function(dbExample) {
+  app.get("/example/:id", function (req, res) {
+    db.Example.findOne({ where: { id: req.params.id } }).then(function (dbExample) {
       res.render("example", {
         example: dbExample
       });
     });
   });
 
+  //User pages
+  app.get("/signup", (req, res) => {
+    res.render("signup");
+  });
+
+  app.get("/signin", (req, res) => {
+    res.render("signin");
+  });
+
+  // app.get("/user", (req, res) => {
+  //   res.rednder("user");
+  // });
+
+  app.get('/user', isLoggedIn, (req, res) => {
+    res.render("user");
+  });
+
+  function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated())
+      return next();
+
+    res.redirect('/signin');
+  };
+
   // Render 404 page for any unmatched routes
-  app.get("*", function(req, res) {
+  app.get("*", function (req, res) {
     res.render("404");
   });
 };
