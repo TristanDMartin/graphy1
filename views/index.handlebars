@@ -1,14 +1,5 @@
 <!-- Main Bootstrap Search -->
 <div class="container">
-
-  <!-- Jumbotron for Title -->
-  {{!-- <div class="jumbotron" style="background-color: #20315A ; color: white;">
-    <h1 class="text-center">
-      <strong>
-        <i class="fa fa-newspaper-o"></i> New York Times Search</strong>
-    </h1>
-  </div> --}}
-
   <!-- CHART HTML (see script at bottom) -->
   <div id="chart_div"></div>
   <!-- CHART HTML (see script at bottom) -->
@@ -20,8 +11,7 @@
       <!-- First card is for handling the search parameters -->
       <div class="card">
         <div class="card-header">
-          <strong>
-            <i class="fa fa-list-alt"></i> Search Parameters</strong>
+          <strong>Search for a Stock!</strong>
         </div>
         <div class="card-body">
 
@@ -31,14 +21,12 @@
             <!-- Here we create the text box for capturing the search term-->
             <div class="form-group">
               <label for="search">Search Term:</label>
-              <input type="text" class="form-control" id="search-term">
+              <input type="text" class="form-control" id="search-term" placeholder="" autofocus>
             </div>
 
             <!-- Here we have our final submit button -->
-            <button type="submit" class="btn btn-default" id="run-search">
-              <i class="fa fa-search"></i> Search</button>
-            <button class="btn btn-default" id="clear-all">
-              <i class="fa fa-trash"></i> Clear Results</button>
+            <button type="submit" class="btn btn-default" id="run-search">Search</button>
+            <button class="btn btn-default" id="clear-all">Clear Results</button>
 
           </form>
         </div>
@@ -56,8 +44,7 @@
 
         <!-- card Heading for the retrieved articles box -->
         <div class="card-header">
-          <strong>
-            <i class="fa fa-table"></i> Top Articles</strong>
+          <strong>Top Articles</strong>
         </div>
 
         <!-- This main card will hold each of the resulting articles -->
@@ -67,7 +54,7 @@
     </div>
   </div>
 
-  
+
 
 </div>
 

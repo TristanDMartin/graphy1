@@ -1,16 +1,41 @@
-//query strings, urls, ajax, and such
-
-function getStockChart() {
-
-function getChartURL() {
-
-
-    var querySearch = $("#search-term").val().split(' ').join("+").toLowerCase();
-    console.log("ASJDLASLDJHASJDHASJDHASKJD" + querySearch);
-
-
+function getStockTicker(searchTerm) {
     $.ajax({
-        url: "/api/time-series-daily/q/" + querySearch,
+        url: "api/search/" + searchTerm,
+        type: "GET"
+    })
+        .then((result) => {
+            if (result[0]) {
+                var stockName = result[0].search_term;
+                var symbol = result[0].symbol;
+                getStockChart(symbol);
+                getHeadlines(stockName);
+            }
+            else {
+                $.ajax({
+                    url: "/api/tickers/" + searchTerm,
+                    type: "GET"
+                }).then((result) => {
+                    if (result[0]) {
+                        var stockName = result[0].search_term;
+                        var symbol = result[0].symbol;
+                        getStockChart(symbol);
+                        getHeadlines(stockName);
+                    }
+                    else {
+                        $("#article-section").text(" Sorry, We could not find any results for the specific search. Please try again. ");
+                    }
+                })
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+}
+
+//query strings, urls, ajax, and such
+function getStockChart(stockName) {
+    $.ajax({
+        url: "/api/time-series-daily/q/" + stockName,
         method: "GET"
     })
         .then((result) => {
@@ -21,13 +46,11 @@ function getChartURL() {
         });
 }
 
-function makeGraph(obj) {
+function makeGraph(result) {
 
     //Stock object
 
-    var values = obj["Time Series (Daily)"];
-    console.log("OBJECCTTTTT: " + JSON.stringify(obj));
-    console.log(values[moment().subtract(1, "days").format("YYYY-MM-DD")]);
+    var values = result["Time Series (Daily)"];
 
     $("#chart-div").empty();
 
@@ -53,7 +76,7 @@ function makeGraph(obj) {
         //populate array to be added to graph
         rowsArr.unshift([dateArr[0], openArr[0], closeArr[0]])
     }
-    console.log(rowsArr);
+    // console.log(rowsArr);
 
     google.charts.load('current', { packages: ['corechart', 'line'] });
     google.charts.setOnLoadCallback(drawBasic);
@@ -64,14 +87,6 @@ function makeGraph(obj) {
         data.addColumn('date', 'X');
         data.addColumn('number', 'Open');
         data.addColumn('number', 'Close');
-
-        //ddd MMM DD YYYY HH:mm:ss
-        // var d1 = new Date(2010, 3, 10);
-        // var d2 = new Date(moment().format("YYYY"), moment().format("D"), moment().format("M"));
-        var d1 = moment().subtract(1, "days").toDate();
-        var d2 = moment().toDate();
-        console.log(d1);
-        console.log(d2);
         data.addRows(rowsArr);
 
         var options = {
@@ -89,15 +104,24 @@ function makeGraph(obj) {
     }
 }
 
-console.log("read stock.js");
+
 //on click event
-$("#chart").on("click", function (event) {
+$("#run-search").on("click", function (event) {
     event.preventDefault();
+    var querySearch = $("#search-term").val().toLowerCase();
+    if (querySearch) {
+        console.log(querySearch);
+        getStockTicker(querySearch);
+        $("#article-section").empty();
+        $("#search-term").val("");
+        $("#search-term").attr("placeholder", querySearch);
+    }
+    else {
+        $("#article-section").text("Please enter a search term.");
+    }
 
-    getStockChart();
-    console.log("my onclick");
-    getHeadlines();
+});
 
-    getURL();
-
+$("#search-term").on("click", function () {
+    $("#search-term").attr("placeholder", "");
 });
