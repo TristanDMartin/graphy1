@@ -1,15 +1,14 @@
+//nytCode.js is implemented on our index.handlebars page. 
+
+//getHeadlines is grabbing the user input
 function getHeadlines(fixString) {
-  // queryURL is the url we'll use to query the API
-
-  //CREATE A CUSTOM AJAX CALL TO GRAB THE APIKEY CALL IN API ROUTES 
-  //THIS WILL GRAB THE API KEY 
-
+  //Ajax call here to pass our search term (company/stock name) through our news article API Query. 
   $.ajax({
     url: "/api/everything/q/" + fixString,
     method: "GET"
   })
     .then((result) => {
-      console.log(result);
+      //passing the result through our updatePage function..
       updatePage(result);
     })
     .catch((error) => {
@@ -19,12 +18,7 @@ function getHeadlines(fixString) {
 
 
 function updatePage(result) {
-  // Get from the form the number of results to display
-  // API doesn't have a "limit" parameter, so we have to do this ourselves
-  // var numArticles = $("#article-count").val(); 
-
   // Log the newsAPI to console, where it will show up as an object
-  // console.log(newsAPI);
   console.log("------------------------------------");
 
   // Loop through and build elements for the defined number of articles
@@ -46,7 +40,7 @@ function updatePage(result) {
 
       // If the article has a headline, log and append to $articleList
       var headline = article.title;
-      console.log("HEADLINE ========= : " + headline);
+      // console.log("HEADLINE ========= : " + headline);
       var $articleListItem = $("<li class='list-group-item articleHeadline'>");
 
       if (headline) {
