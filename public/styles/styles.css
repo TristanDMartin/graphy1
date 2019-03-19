@@ -280,9 +280,9 @@ input[type=submit]:hover {
 div.container{
   margin-top: 5rem;
   background-color: white;
-  margin-bottom: 55rem;
   margin-left: 17rem;
   margin-right: 10rem;
+  margin-bottom: .5rem;
   border: #5a5a5a;
   align-content: center;
 }
@@ -291,14 +291,14 @@ div.container{
   padding-left: .1rem;
 }
 
-div.bootstrap {
+/* div.bootstrap {
 height: 50rem;
 }
 
 div.snippet {
   height: 50rem;
 
-}
+} */
 
 .containerboot {
   margin-top: 5rem;
