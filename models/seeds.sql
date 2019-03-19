@@ -477,7 +477,7 @@ INSERT INTO stock_master (symbol, name) VALUES ('BBRX', 'Braeburn Pharmaceutical
 INSERT INTO stock_master (symbol, name) VALUES ('BCLI', 'Brainstorm Cell Therapeutics Inc.') ;
 INSERT INTO stock_master (symbol, name) VALUES ('BVNSC', 'Brandes Investment Trust') ;
 INSERT INTO stock_master (symbol, name) VALUES ('BDGE', 'Bridge Bancorp, Inc.') ;
-INSERT INTO stock_master (symbol, name) VALUES ('BLIN          ', 'Bridgeline Digital, Inc.') ;
+INSERT INTO stock_master (symbol, name) VALUES ('BLIN   ', 'Bridgeline Digital, Inc.') ;
 INSERT INTO stock_master (symbol, name) VALUES ('BWB', 'Bridgewater Bancshares, Inc.') ;
 INSERT INTO stock_master (symbol, name) VALUES ('BRID', 'Bridgford Foods Corporation') ;
 INSERT INTO stock_master (symbol, name) VALUES ('BCOV', 'Brightcove Inc.') ;

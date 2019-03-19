@@ -92,14 +92,10 @@ function updatePage(result) {
     }
   }
 }
-// Function to empty out the articles
-// function clearUs() {
-//   $("#article-section").empty();
-//   $("#chart_div").empty();
-// };
 
 //  .on("click") function associated with the clear button
 $("#clear-all").on("click", function (event) {
+  event.preventDefault();
   $("#article-section").empty();
   $("#chart_div").empty();
 });
