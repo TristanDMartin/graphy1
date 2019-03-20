@@ -118,11 +118,16 @@ footer {
   text-align: center;
 }
 
-.containerlogin {
+#container {
+  margin-top: .5rem;
+}
+
+
+/* .containerlogin {
   width: 768px;
   height: 346px;
   background-color: #ccc;
-}
+} */
 
 .btn {
   text-align: center;
