@@ -5,7 +5,7 @@
     <li class="dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">
         <span class="glyphicon glyphicon-user"></span> 
-        <strong>USER NAME</strong>
+        <strong>{{#if user}}{{user.email}}{{/if}}</strong>
         <span class="glyphicon glyphicon-chevron-down"></span>
       </a>
       <ul class="dropdown-menu">
@@ -94,6 +94,7 @@
   <section id="colorback1">
     <!-- Main Bootstrap Search -->
     <div class="container">
+      <div id="chart_title"></div>
       <!-- CHART HTML (see script at bottom) -->
       <div id="chart_div"></div>
       <!-- CHART HTML (see script at bottom) -->
@@ -271,11 +272,11 @@
   <!-- <hr class="featurette-divider"> -->
   <div class="color2">
     <div class="row featurette">
-      <div class="col-md-7">
+      <div class="col-md-7 col-xs-6">
         <h2 class="featurette-heading">Advanced Real-Time Chart <span class="text-muted"></span></h2>
         <p class="lead">A free and powerful charting solution that easily embeds into any website.</p>
       </div>
-      <div class="col-md-5">
+      <div class="col-md-5 col-xs-6">
         <!-- TradingView Widget BEGIN -->
         <div class="tradingview-widget-container">
           <div id="tradingview_18e3d"></div>
@@ -397,7 +398,8 @@
 <!-- CHART SCRIPT -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="/js/stock.js"></script>
-<!-- CHART SCRIPT -->
+<!-- PIN SCRIPT -->
+<script src="/js/pin.js"></script>
 
 
 

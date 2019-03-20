@@ -3,12 +3,16 @@ var db = require("../models");
 module.exports = function (app, passport) {
   // Load index page
   app.get("/", function (req, res) {
-    db.Example.findAll({}).then(function (dbExamples) {
+    if (req.isAuthenticated()){
+      res.render("index", {
+        user: req.user
+      })
+    } else {
       res.render("index", {
         // msg: "Welcome!",
         // examples: dbExamples
       });
-    });
+    }
   });
 
   // Load example page and pass in an example by id
@@ -33,11 +37,19 @@ module.exports = function (app, passport) {
   //   res.rednder("user");
   // });
 
-  app.get('/user', isLoggedIn, (req, res) => {
+  app.get('/user', isLoggedIn, (req, res, {user}) => {
     res.render("user");
+    console.log(req.user.id);
   });
 
   function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated())
+      return next();
+
+    res.redirect('/signin');
+  };
+
+  function isLoggedInHome(req, res, next) {
     if (req.isAuthenticated())
       return next();
 

@@ -1,3 +1,5 @@
+var chartTitle = '';
+
 function getStockTicker(searchTerm) {
     $.ajax({
         url: "api/search/" + searchTerm,
@@ -7,6 +9,7 @@ function getStockTicker(searchTerm) {
             if (result[0]) {
                 var stockName = result[0].search_term;
                 var symbol = result[0].symbol;
+                chartTitle = stockName;
                 getStockChart(symbol);
                 getHeadlines(stockName);
             }
@@ -18,6 +21,7 @@ function getStockTicker(searchTerm) {
                     if (result[0]) {
                         var stockName = result[0].search_term;
                         var symbol = result[0].symbol;
+                        chartTitle = stockName;
                         getStockChart(symbol);
                         getHeadlines(stockName);
                     }
@@ -101,6 +105,19 @@ function makeGraph(result) {
         var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
 
         chart.draw(data, options);
+        google.visualization.events.addListener(chart, 'select', selectHandler);
+        $("#chart_title").text(chartTitle);
+
+        function selectHandler(){
+            $.ajax({
+                url: "/getUser",
+                type: "GET"
+            }).then((user) => {
+                var selection = chart.getSelection();
+                console.log(user);
+            });
+        
+        }
     }
 }
 

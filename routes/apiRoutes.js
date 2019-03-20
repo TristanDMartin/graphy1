@@ -1,5 +1,6 @@
 var db = require("../models");
 const https = require('https');
+const html = require("./htmlRoutes.js");
 
 
 module.exports = function (app, passport) {
@@ -18,11 +19,19 @@ module.exports = function (app, passport) {
   });
 
   // Delete an example by id
-  app.delete("/api/examples/:id", function (req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function (dbExample) {
-      res.json(dbExample);
-    });
+  app.get("/getUser", isLoggedIn, function (req, res) {
+    db.User.findOne({where: {id: req.user.id}}).then(function(dbUser) {
+      console.log(dbUser);
+      res.json(dbUser);
+    })
   });
+
+  function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated())
+      return next();
+
+    res.redirect('/signin');
+  };
 
   // search for company name by stock symbol
   app.get("/api/tickers/:symbol", function (req, res) {
