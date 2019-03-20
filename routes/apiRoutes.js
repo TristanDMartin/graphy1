@@ -19,11 +19,15 @@ module.exports = function (app, passport) {
   });
 
   // Delete an example by id
-  app.get("/getUser", isLoggedIn, function (req, res) {
-    db.User.findOne({where: {id: req.user.id}}).then(function(dbUser) {
-      console.log(dbUser);
-      res.json(dbUser);
-    })
+  app.get("/getUser", function (req, res) {
+    if (req.isAuthenticated()) {
+      db.User.findOne({where: {id: req.user.id}}).then(function(dbUser) {
+        console.log(dbUser);
+        res.json(dbUser);
+      })
+    } else {
+      res.json(null);
+    }
   });
 
   function isLoggedIn(req, res, next) {
