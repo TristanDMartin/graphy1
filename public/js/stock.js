@@ -114,7 +114,7 @@ function makeGraph(result) {
                 type: "GET"
             }).then((user) => {
                 var selection = chart.getSelection();
-                console.log(user);
+                console.log(user.email+ " selected " + JSON.stringify(selection));
             });
         
         }
