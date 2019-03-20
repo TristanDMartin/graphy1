@@ -1,5 +1,9 @@
 //stock.js is used to call multiple functions within index.handlebars
 
+//Animations on scroll init:
+AOS.init();
+
+
 //Function to grab user input for their search term and GET the API search to create stock chart with either
 // their ticker value or their search term name (stock name). 
 function getStockTicker(searchTerm) {

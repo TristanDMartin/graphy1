@@ -84,6 +84,7 @@ function updatePage(result) {
       // Append the article
       $articleList.append($articleListItem);
     }
+    $('#hidden_articles').show();
   }
 }
 
