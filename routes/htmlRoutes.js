@@ -33,6 +33,11 @@ module.exports = function (app, passport) {
     res.render("signin");
   });
 
+  app.get("/logout", (req, res) => {
+    req.logout();
+    res.redirect("/");;
+  })
+
   // app.get("/user", (req, res) => {
   //   res.rednder("user");
   // });
