@@ -5,7 +5,7 @@
     <li class="dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">
         <span class="glyphicon glyphicon-user"></span> 
-        <strong>USER NAME</strong>
+        <strong>{{#if user}}{{user.email}}{{/if}}</strong>
         <span class="glyphicon glyphicon-chevron-down"></span>
       </a>
       <ul class="dropdown-menu">
@@ -21,7 +21,7 @@
                 <p class="text-left"><strong>USER</strong></p>
                 <p class="text-left small">smaple@email.com</p>
                 <p class="text-left">
-                  <a href="#" class="btn btn-primary btn-block btn-sm">Log-in</a>
+                  <a href="/user" class="btn btn-primary btn-block btn-sm">Profile</a>
                 </p>
               </div>
             </div>
@@ -33,7 +33,7 @@
             <div class="row">
               <div class="col-lg-12">
                 <p>
-                  <a href="#" class="btn btn-danger btn-block">Log-Out</a>
+                  <a href="/logout" class="btn btn-danger btn-block">Log-Out</a>
                 </p>
               </div>
             </div>
@@ -138,6 +138,7 @@
         <!-- This card will initially be made up of a card and wells for each of the articles retrieved -->
         <div class="card">
 
+
           <!-- card Heading for the retrieved articles box -->
           <div class="card-header">
             <strong>Top Articles</strong>
@@ -145,14 +146,21 @@
 
           <!-- This main card will hold each of the resulting articles -->
           <div class="card-body" id="article-section">
+
+           
+
           </div>
         </div>
       </div>
       <div class="col-sm-1"></div>
 
+
     </div>
   </div>
   <!-- finished add-on for mike/lucas information -->
+
+
+
 
 
 
@@ -273,11 +281,11 @@
   <!-- START THE FEATURETTES -->
   <div class="color2">
     <div class="row featurette">
-      <div class="col-md-7">
+      <div class="col-md-7 col-xs-6">
         <h2 class="featurette-heading">Advanced Real-Time Chart <span class="text-muted"></span></h2>
         <p class="lead">A free and powerful charting solution that easily embeds into any website.</p>
       </div>
-      <div class="col-md-5">
+      <div class="col-md-5 col-xs-6">
         <!-- TradingView Widget BEGIN -->
         <div class="tradingview-widget-container">
           <div id="tradingview_18e3d"></div>
@@ -402,9 +410,15 @@
 <!-- CHART SCRIPT -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="/js/stock.js"></script>
-<!-- CHART SCRIPT -->
+<!-- PIN SCRIPT -->
+<script src="/js/pin.js"></script>
+
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
   integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
   integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+

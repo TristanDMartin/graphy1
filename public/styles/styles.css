@@ -2,8 +2,11 @@
 
 /* Padding below the footer and lighter body text */
 
+/* adding custom font */
+
 body {
   color: #5a5a5a;
+  font-family: 'Poppins', sans-serif;
 }
 /* for navbar setup */
 .navbar-login
@@ -15,7 +18,7 @@ body {
 
 .navbar-login-session
 {
-    padding: 10px;
+    padding: 10px; 
     padding-bottom: 0px;
     padding-top: 0px;
 }
@@ -221,6 +224,29 @@ input[type=submit]:hover {
 
 /* starting for user.html custom user page */
 
+div.container{
+  margin-top: 5rem;
+  background-color: white;
+  margin-left: 17rem;
+  margin-right: 10rem;
+  margin-bottom: .5rem;
+  border: #5a5a5a;
+  align-content: center;
+}
+
+.nav {
+  padding-left: .1rem;
+}
+
+/* div.bootstrap {
+height: 50rem;
+}
+
+div.snippet {
+  height: 50rem;
+
+} */
+
 .containerboot {
   margin-top: 5rem;
   background-color: white;
@@ -239,6 +265,7 @@ input[type=submit]:hover {
 } 
 
 
+
 #article-section{
   height: 200px;
   overflow-y: auto;
@@ -248,4 +275,38 @@ input[type=submit]:hover {
   text-align: center;
   padding-top: 10px;
 }
+
+
+/* <!-- Here we create the text box for capturing the search term--> */
+.form-group {
+  text-align: center;
+}
+
+.form-control {
+  align-content: center;
+  margin-left: 16.5rem;
+}
+
+.mart {
+  padding-top: 2rem;
+  text-align: center;
+}
+
+
+
+/* media queries */
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 575.98px) { ... }
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) and (max-width: 767.98px) { ... }
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) and (max-width: 991.98px) { ... }
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) and (max-width: 1199.98px) { ... }
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { ... }
 
