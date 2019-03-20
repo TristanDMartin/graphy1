@@ -35,6 +35,7 @@ body {
 @media (min-width: 62em) {
   .featurette-heading {
     margin-top: 7rem;
+    padding-left: .1rem;
   }
 }
 
@@ -53,20 +54,25 @@ footer {
 .color4{
   background-color: #1a1c26;
   color: white;
-  /* padding-left: 5rem; */
+  padding-left: .5rem; 
+  padding-bottom: 1.5rem;
+  padding-top: .2rem;
 }
 
 .color3{
   background-color: white;
   color: black;
-  /* padding-left: 5rem; */
+  padding-left: .5rem; 
+  padding-bottom: 1.5rem;
+  padding-top: .2rem;
 }
 
 .color2{
   background-color: #d3d3d3;
   color: black;
-  /* padding-left: 5rem; */
-  /* padding-bottom: 1.5rem; */
+  padding-left: .5rem; 
+  padding-bottom: 1.5rem;
+  padding-top: .2rem;
 }
 
 .color1{
@@ -78,24 +84,51 @@ footer {
 .color01{
   background-color: #1a1c26;
   color: black;
-  /* padding-left: 5rem; */
+  padding-left: .5rem; 
   /* padding-bottom: 1.5rem; */
 }
 
 #color001{
-  margin-top: 3%;
+  margin-top: 1%;
   background-color: #1a1c26;
   color: black;
 }
 
-#centerM {
+.form-group {
+  text-align: center;
+  width: 50%;
+
+}
+
+.form-group1 {
   text-align: center;
 }
 
 * {box-sizing: border-box}
 
+.animated {
+  animation-duration: 3s;
+  animation-delay: 2s;
+  animation-iteration-count: infinite;
+}
 
 /* starting for styles of login */
+
+.logologin {
+  text-align: center;
+}
+
+.containerlogin {
+  width: 768px;
+  height: 346px;
+  background-color: #ccc;
+}
+
+.btn {
+  text-align: center;
+  width: 50%;
+}
+
 
 /* style the container */
 body {
@@ -249,12 +282,18 @@ input[type=submit]:hover {
   padding-top: 10px;
 }
 
-Collapse
+/* // Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { ... }
 
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) and (max-width: 1199.98px) { ... }
 
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) and (max-width: 991.98px) { ... }
 
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) and (max-width: 767.98px) { ... }
 
-Message Input
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 575.98px) { ... } */
 
-
-Message Lucas, Michael
