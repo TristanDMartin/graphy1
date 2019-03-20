@@ -93,6 +93,27 @@
 
   <!-- Main Bootstrap Search -->
   <div class="container">
+
+    {{!-- <!-- Modal HTML -->
+    <div id="myModal" class="modal fade">
+      <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="icon-box">
+              <i class="material-icons">&#xE5CD;</i>
+            </div>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          </div>
+          <div class="modal-body text-center">
+            <h4>Ooops!</h4>
+            <p>Something went wrong. File was not uploaded.</p>
+            <button class="btn btn-success" data-dismiss="modal">Try Again</button>
+          </div>
+        </div>
+      </div>
+    </div> --}}
+
+
     <!-- CHART HTML (see script at bottom) -->
     <div id="chart_div"></div>
     <!-- CHART HTML (see script at bottom) -->
@@ -107,8 +128,7 @@
           <div class="card-header">
             <strong>Search for a Stock!</strong>
           </div>
-          <div class="card-body">
-
+          <div class="card-body" id="search_card">
             <!-- Here we create an HTML Form for handling the inputs-->
             <form role="form">
 
@@ -132,7 +152,7 @@
     <!-- This row will handle all of the retrieved articles -->
     <div class="row">
       <div class="col-sm-1"></div>
-      <div class="col-sm-10" style="display:none;" id="hidden_articles">
+      <div class="col-sm-10" style="display:none;" id="hidden_articles" data-aos="fade-up">
         <br>
 
         <!-- This card will initially be made up of a card and wells for each of the articles retrieved -->
@@ -157,7 +177,7 @@
 
 
   <div class="color1">
-    <div class="container-fluid">
+    <div class="container-fluid" data-aos="fade-down"> 
       <div id="market">
         <h2>Markets</h2>
       </div>
@@ -273,11 +293,11 @@
   <!-- START THE FEATURETTES -->
   <div class="color2">
     <div class="row featurette">
-      <div class="col-md-7">
+      <div class="col-md-7" data-aos="fade-right" id="advancedDiv">
         <h2 class="featurette-heading">Advanced Real-Time Chart <span class="text-muted"></span></h2>
         <p class="lead">A free and powerful charting solution that easily embeds into any website.</p>
       </div>
-      <div class="col-md-5">
+      <div class="col-md-4" data-aos="fade-left">
         <!-- TradingView Widget BEGIN -->
         <div class="tradingview-widget-container">
           <div id="tradingview_18e3d"></div>
@@ -312,13 +332,13 @@
   <!-- <hr class="featurette-divider"> -->
   <div class="color3">
     <div class="row">
-      <div class="col-md-7 order-md-2">
+      <div class="col-md-7 order-md-2" data-aos="fade-right">
         <h2 class="featurette-heading">Technical Analysis <span class="text-muted"></span></h2>
         <p class="lead">is a trading discipline employed to evaluate investments and identify trading
           opportunities by analyzing statistical trends gathered from trading activity, such as price
           movement and volume.</p>
       </div>
-      <div class="col-md-5 order-md-1">
+      <div class="col-md-5 order-md-1" data-aos="fade-left">
         <!-- TradingView Widget BEGIN -->
         <div class="tradingview-widget-container">
           <div class="tradingview-widget-container__widget"></div>
@@ -346,7 +366,7 @@
   <!-- <hr class="featurette-divider"> -->
   <div class="color4">
     <div class="row">
-      <div class="col-md-7">
+      <div class="col-md-7" data-aos="zoom-out-down" id="currencyTextDiv">
         <h2 class="featurette-heading">Forex Cross Rates <span class="text-muted"></span></h2>
         <p class="lead">A cross rate is the currency exchange rate between two currencies when neither are
           the
@@ -355,7 +375,7 @@
           regardless of
           what country the quote is provided in.</p>
       </div>
-      <div class="col-md-5">
+      <div class="col-md-4" data-aos="zoom-out-up" id="currencyDiv">
         <!-- TradingView Widget BEGIN -->
         <div class="tradingview-widget-container">
           <div class="tradingview-widget-container__widget"></div>

@@ -24,6 +24,10 @@ function getStockTicker(searchTerm) {
                 getStockChart(symbol);
                 // & pass stockName into getHeadlines -> nytCode.js -> to grab and search articles with that keyword.
                 getHeadlines(stockName);
+                //Setting the value to "" so the input field is empty.
+                $("#search-term").val("");
+                //Placeholder created to store the previous request. - Fancy ;) 
+                $("#search-term").attr("placeholder", querySearch);
             }
             //Else call the other AJAX call to check by ticker name instead.
             else {
@@ -38,11 +42,15 @@ function getStockTicker(searchTerm) {
                         var symbol = result[0].symbol;
                         getStockChart(symbol);
                         getHeadlines(stockName);
+                        //Setting the value to "" so the input field is empty.
+                        $("#search-term").val("");
+                        //Placeholder created to store the previous request. - Fancy ;) 
+                        $("#search-term").attr("placeholder", querySearch);
                     }
                     //ELSE if we get to this point and the search term is invalid by company name and ticker, let the customer know
                     // they need to try again. We've checked both ticker and company name in the seeds.sql.
                     else {
-                        $("#article-section").text(" Sorry, We could not find any results for the specific search. Please try again. ");
+                        $("#myModal").toggle();
                     }
                 })
             }
@@ -144,10 +152,6 @@ $("#run-search").on("click", function (event) {
         getStockTicker(querySearch);
         //Emptying the article section in the event this isn't the first search.
         $("#article-section").empty();
-        //Setting the value to "" so the input field is empty.
-        $("#search-term").val("");
-        //Placeholder created to store the previous request. - Fancy ;) 
-        $("#search-term").attr("placeholder", querySearch);
     }
     else {
         //If the user does not put any values in the search field please try again. 
