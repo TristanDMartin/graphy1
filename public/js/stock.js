@@ -1,3 +1,4 @@
+
 //stock.js is used to call multiple functions within index.handlebars
 
 //Animations on scroll init:
@@ -6,6 +7,10 @@ AOS.init();
 
 //Function to grab user input for their search term and GET the API search to create stock chart with either
 // their ticker value or their search term name (stock name). 
+
+var chartTitle = '';
+
+
 function getStockTicker(searchTerm) {
 
     //AJAX Call to search with the Name** term. 
@@ -20,7 +25,11 @@ function getStockTicker(searchTerm) {
                 var stockName = result[0].search_term;
                 //symbol stores the symbol from our result passed as a parameter.
                 var symbol = result[0].symbol;
+
                 //Pass the symbol into getStockChart as the ticker is required for our API query
+
+                chartTitle = stockName;
+
                 getStockChart(symbol);
                 // & pass stockName into getHeadlines -> nytCode.js -> to grab and search articles with that keyword.
                 getHeadlines(stockName);
@@ -40,6 +49,7 @@ function getStockTicker(searchTerm) {
                     if (result) {
                         var stockName = result[0].search_term;
                         var symbol = result[0].symbol;
+                        chartTitle = stockName;
                         getStockChart(symbol);
                         getHeadlines(stockName);
                         //Setting the value to "" so the input field is empty.
@@ -137,6 +147,19 @@ function makeGraph(result) {
         var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
         //draw creates the chart from our new chart object and passes our data, options defined above. 
         chart.draw(data, options);
+        google.visualization.events.addListener(chart, 'select', selectHandler);
+        $("#chart_title").text(chartTitle);
+
+        function selectHandler(){
+            $.ajax({
+                url: "/getUser",
+                type: "GET"
+            }).then((user) => {
+                var selection = chart.getSelection();
+                console.log(user.email+ " selected " + JSON.stringify(selection));
+            });
+        
+        }
     }
 }
 
