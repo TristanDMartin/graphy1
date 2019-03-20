@@ -11,7 +11,7 @@ function getStockTicker(searchTerm) {
     })
         .then((result) => {
             //If result true, and the search term is found in the API by name..
-            if (result) {
+            if (result[0]) {
                 //stockName stores the search_term from our result passed as a parameter.
                 var stockName = result[0].search_term;
                 //symbol stores the symbol from our result passed as a parameter.
