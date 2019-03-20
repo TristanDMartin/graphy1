@@ -5,7 +5,13 @@
 // their ticker value or their search term name (stock name). 
 
 var chartTitle = '';
-
+//Variables created to store array data for our chart. MUST BE GLOBAL FOR CLICK FUNCTION
+var x = [];
+var rowsArr = [];
+var dateReadable = [];
+var dateArr = [];
+var openArr = [];
+var closeArr = [];
 
 function getStockTicker(searchTerm) {
 
@@ -84,16 +90,11 @@ function makeGraph(result) {
     //Clearing the current div in order to populate the new. 
     $("#chart-div").empty();
 
-    //Variables created to store array data for our chart.
-    var x = [];
-    var rowsArr = [];
-    var dateArr = [];
-    var openArr = [];
-    var closeArr = [];
     //For loop in order to keep our search results limited to the past 30 days worth of data.
     for (var i = 0; i < 30; i++) {
         //moment.js formatting for our dates/times
         var day = moment().subtract(i, "days").format("YYYY-MM-DD");
+        dateReadable.unshift(day);
 
         //fillout undefined values by searching for the formatted day variable above within our values array.
         if (values[day] === undefined) {
@@ -143,8 +144,14 @@ function makeGraph(result) {
                 url: "/getUser",
                 type: "GET"
             }).then((user) => {
-                var selection = chart.getSelection();
-                console.log(user.email+ " selected " + JSON.stringify(selection));
+                if(user === null){
+                    $("#graph-modal").fadeIn("show");
+                } else {
+                    var selection = chart.getSelection();
+                    $("#graph-modal").fadeIn("show");
+                    console.log(user.email+ " selected " + JSON.stringify(selection));
+                    $("#graph-modal-text").text("You will make a pin at: " + dateReadable[selection[0]["row"]]+ " (format: YYYY-MM-DD)");
+                }
             });
         
         }
@@ -178,3 +185,9 @@ $("#run-search").on("click", function (event) {
 $("#search-term").on("click", function () {
     $("#search-term").attr("placeholder", "");
 });
+
+$("#close-modal").on("click", function(e) {
+    e.preventDefault();
+
+    $("#graph-modal").fadeOut();
+})
