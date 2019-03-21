@@ -122,7 +122,8 @@
   <div class="container">
 
     <!-- CHART HTML (see script at bottom) -->
-    <div id="chart_div"></div>
+    <h2 id="chart-title"></h2>
+    <div id="chart-div"></div>
     <!-- CHART HTML (see script at bottom) -->
 
     <!-- Row for Searching New York Times -->
@@ -470,16 +471,24 @@
       <div class="modal-header">
             {{#if user}}
         <h5 class="modal-title">Create Graph Pin</h5>
+      </div>
+        <div class="modal-body">
+          <form>
+            <label for="graph-modal-symbol">Stock selected:</label>
+            <input id="graph-modal-symbol" type="text" disabled>
+            <label for="graph-modal-date">Date selected:</label>
+            <input id="graph-modal-date" type="text" disabled>
+            <label for="graph-modal-text">Notes:</label>
+            <input id="graph-modal-text" type="text">
+          </form>
+        </div>
             {{else}}
         <h5 class="modal-title">Sorry...</h5>
+      </div>
+          <div class="modal-body">
+            <p id="graph-modal-text">You will need an account to save your custom graph data!</p>
+          </div>
             {{/if}}
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p id="graph-modal-text">You will need an account to save your custom graph data!</p>
-      </div>
       <div class="modal-footer">
         {{#if user}}<button id="submit-modal" type="button" class="btn btn-primary">Save changes</button>{{/if}}
         <button id="close-modal" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
