@@ -5,36 +5,28 @@
 body {
   color: #5a5a5a;
 }
+
 /* for navbar setup */
-.navbar-login
-{
-    width: 305px;
-    padding: 10px;
-    padding-bottom: 0px;
+
+.navbar-login {
+  width: 305px;
+  padding: 10px;
+  padding-bottom: 0px;
 }
 
-.navbar-login-session
-{
-    padding: 10px;
-    padding-bottom: 0px;
-    padding-top: 0px;
+.navbar-login-session {
+  padding: 10px;
+  padding-bottom: 0px;
+  padding-top: 0px;
 }
 
-.icon-size
-{
-    font-size: 87px;
+.icon-size {
+  font-size: 87px;
 }
 
-/* GRAPH-MODAL
--------------------------------------------------- */
-/* #graph-modal{
-  display:none;
-} */
 
 /* RESPONSIVE CSS
 -------------------------------------------------- */
-
-
 
 @media (min-width: 62em) {
   .featurette-heading {
@@ -44,6 +36,7 @@ body {
 }
 
 /* Style the footer */
+
 footer {
   background-color: black;
   padding: 10px;
@@ -55,7 +48,7 @@ footer {
   text-align: center;
 }
 
-.color4{
+.color4 {
   background-color: #1a1c26;
   color: white;
   padding-left: .5rem; 
@@ -63,7 +56,7 @@ footer {
   padding-top: .2rem;
 }
 
-.color3{
+.color3 {
   background-color: white;
   color: black;
   padding-left: .5rem; 
@@ -71,7 +64,7 @@ footer {
   padding-top: .2rem;
 }
 
-.color2{
+.color2 {
   background-color: #d3d3d3;
   color: black;
   padding-left: .5rem; 
@@ -79,27 +72,28 @@ footer {
   padding-top: .2rem;
 }
 
-.color1{
+.color1 {
   background-color: white;
   color: black;
   margin-top: 1.5%;
 }
 
-.color01{
+.color01 {
   background-color: #1a1c26;
   color: black;
   padding-left: .5rem; 
   /* padding-bottom: 1.5rem; */
 }
 
-#color001{
-  margin-top: 2.5%;
-  margin-bottom: .5rem;
+
+#color001 {
+  /* margin-top: 3%; */
   background-color: #1a1c26;
   color: black;
 }
 
 .form-group {
+  margin: auto;
   text-align: center;
   width: 50%;
 
@@ -109,13 +103,10 @@ footer {
   text-align: center;
 }
 
-* {box-sizing: border-box}
 
-.animated {
-  animation-duration: 3s;
-  animation-delay: 2s;
-  animation-iteration-count: infinite;
-}
+* {
+  box-sizing: border-box
+  }
 
 /* starting for styles of login */
 
@@ -148,6 +139,7 @@ footer {
 
 
 /* style the container */
+
 body {
   background-color: #1a1c26;
 }
@@ -160,11 +152,11 @@ body {
   margin-left: 25rem;
   margin-right: 25rem;
   margin-top: 15rem;
-} 
+}
 
 /* style inputs and link buttons */
-input,
-.btn {
+
+input, .btn {
   width: 100%;
   padding: 12px;
   border: none;
@@ -174,15 +166,16 @@ input,
   display: inline-block;
   font-size: 17px;
   line-height: 20px;
-  text-decoration: none; /* remove underline from anchors */
+  text-decoration: none;
+  /* remove underline from anchors */
 }
 
-input:hover,
-.btn:hover {
+input:hover, .btn:hover {
   opacity: 1;
 }
 
 /* add appropriate colors to fb, twitter and google buttons */
+
 .fb {
   background-color: #3B5998;
   color: white;
@@ -199,6 +192,7 @@ input:hover,
 }
 
 /* style the submit button */
+
 input[type=submit] {
   background-color: #77c5eb;
   color: white;
@@ -212,6 +206,7 @@ input[type=submit]:hover {
 /* Two-column layout */
 
 /* Clear floats after the columns */
+
 .row:after {
   content: "";
   display: table;
@@ -219,6 +214,7 @@ input[type=submit]:hover {
 }
 
 /* vertical line */
+
 .vl {
   position: absolute;
   left: 50%;
@@ -228,6 +224,7 @@ input[type=submit]:hover {
 }
 
 /* text inside the vertical line */
+
 .inner {
   position: absolute;
   top: 50%;
@@ -239,11 +236,13 @@ input[type=submit]:hover {
 }
 
 /* hide some text on medium and large screens */
+
 .hide-md-lg {
   display: none;
 }
 
 /* bottom container */
+
 .bottom-container {
   text-align: center;
   background-color: #666;
@@ -253,6 +252,7 @@ input[type=submit]:hover {
 }
 
 /* Responsive layout - when the screen is less than 650px wide, make the two columns stack on top of each other instead of next to each other */
+
 @media screen and (max-width: 650px) {
   .col {
     width: 100%;
@@ -281,26 +281,132 @@ input[type=submit]:hover {
   border: #5a5a5a;
   clear: both;
   padding: 10px;
-} 
+}
 
 .col-sm-9 {
   float: right;
   clear: none;
-} 
+}
 
-
-#article-section{
+#article-section {
   height: 200px;
   overflow-y: auto;
 }
 
-#market{
+#market {
   text-align: center;
   padding-top: 10px;
 }
 
+#advancedDiv {
+  margin-left: 15px;
+  margin-top: 15px;
+}
+
+#currencyDiv {
+  margin-top: 15px;
+}
+
+#currencyTextDiv {
+  margin-left: 10px;
+}
+
+/* ----------------------------------------------MODAL */
+
+.modal-confirm {
+  color: #434e65;
+  width: 525px;
+}
+
+.modal-confirm .modal-content {
+  padding: 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+}
+
+.modal-confirm .modal-header {
+  background: #e85e6c;
+  border-bottom: none;
+  position: relative;
+  text-align: center;
+  margin: -20px -20px 0;
+  border-radius: 5px 5px 0 0;
+  padding: 35px;
+}
+
+.modal-confirm h4 {
+  text-align: center;
+  font-size: 36px;
+  margin: 10px 0;
+}
+
+.modal-confirm .form-control, .modal-confirm .btn {
+  min-height: 40px;
+  border-radius: 3px;
+}
+
+.modal-confirm .close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: #fff;
+  text-shadow: none;
+  opacity: 0.5;
+}
+
+.modal-confirm .close:hover {
+  opacity: 0.8;
+}
+
+.modal-confirm .icon-box {
+  color: #fff;
+  width: 95px;
+  height: 95px;
+  display: inline-block;
+  border-radius: 50%;
+  z-index: 9;
+  border: 5px solid #fff;
+  padding: 15px;
+  text-align: center;
+}
+
+.modal-confirm .icon-box i {
+  font-size: 58px;
+  margin: -2px 0 0 -2px;
+}
+
+.modal-confirm.modal-dialog {
+  margin-top: 80px;
+}
+
+.modal-confirm .btn {
+  color: #fff;
+  border-radius: 4px;
+  background: #eeb711;
+  text-decoration: none;
+  transition: all 0.4s;
+  line-height: normal;
+  border-radius: 30px;
+  margin-top: 10px;
+  padding: 6px 20px;
+  min-width: 150px;
+  border: none;
+}
+
+.modal-confirm .btn:hover, .modal-confirm .btn:focus {
+  background: #eda645;
+  outline: none;
+}
+
+.trigger-btn {
+  display: inline-block;
+  margin: 100px auto;
+}
+
 /* // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) { ... }
+
 
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) and (max-width: 1199.98px) { ... }
@@ -314,3 +420,19 @@ input[type=submit]:hover {
 // Extra small devices (portrait phones, less than 576px)
 @media (max-width: 575.98px) { ... } */
 
+/* div#chart-div {
+  padding-top: 100px;
+  margin-top: 10rem;
+  border-radius: 2px;
+} */
+
+#graphy-logo {
+  width: 3rem;
+  height: 3rem;
+}
+
+#searchCard {
+  background-image: url("../styles/graphyLogo.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}

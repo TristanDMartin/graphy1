@@ -1,6 +1,10 @@
 
 //stock.js is used to call multiple functions within index.handlebars
 
+//Animations on scroll init:
+AOS.init();
+
+
 //Function to grab user input for their search term and GET the API search to create stock chart with either
 // their ticker value or their search term name (stock name). 
 
@@ -44,7 +48,7 @@ function getStockTicker(searchTerm) {
                 }).then((result) => {
                     //IF true, and the ticker has been found from the search term, continue to call the functions to create 
                     // both the chart and articles.
-                    if (result) {
+                    if (result[0]) {
                         var stockName = result[0].search_term;
                         var symbol = result[0].symbol;
                         chartTitle = stockName;
@@ -54,7 +58,7 @@ function getStockTicker(searchTerm) {
                     //ELSE if we get to this point and the search term is invalid by company name and ticker, let the customer know
                     // they need to try again. We've checked both ticker and company name in the seeds.sql.
                     else {
-                        $("#article-section").text(" Sorry, We could not find any results for the specific search. Please try again. ");
+                        $('#myModal2').modal('toggle');
                     }
                 })
             }
@@ -177,7 +181,7 @@ $("#run-search").on("click", function (event) {
     }
     else {
         //If the user does not put any values in the search field please try again. 
-        $("#article-section").text("Please enter a search term.");
+        $('#myModal').modal('toggle');
     }
 
 });
