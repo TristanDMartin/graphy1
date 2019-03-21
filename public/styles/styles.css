@@ -79,7 +79,7 @@ footer {
 }
 
 #color001 {
-  margin-top: 3%;
+  /* margin-top: 3%; */
   background-color: #1a1c26;
   color: black;
 }
@@ -254,15 +254,16 @@ input[type=submit]:hover {
   padding-top: 10px;
 }
 
-
-#advancedDiv{
+#advancedDiv {
   margin-left: 15px;
   margin-top: 15px;
 }
-#currencyDiv{
+
+#currencyDiv {
   margin-top: 15px;
 }
-#currencyTextDiv{
+
+#currencyTextDiv {
   margin-left: 10px;
 }
 
@@ -358,13 +359,19 @@ input[type=submit]:hover {
   display: inline-block;
   margin: 100px auto;
 }
-Collapse
 
+#chart-div {
+  padding: 10px;
+  border-radius: 2px;
+}
 
+#graphy-logo {
+  width: 3rem;
+  height: 3rem;
+}
 
-
-Message Input
-
-
-Message Lucas, Michael
-
+#searchCard {
+  background-image: url("../styles/graphyLogo.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
