@@ -88,6 +88,19 @@ module.exports = function (app, passport) {
     });
   });
 
+  app.post("/api/pin", (req, res) => {
+    req.isAuthenticated();
+    console.log(req.body);
+    db.Pin.create({
+      user_id: req.user.id,
+      symbol: req.body.symbol,
+      date: req.body.date,
+      text: req.body.text
+    }).then(function(pin) {
+      res.redirect("/")
+    })
+  })
+
   //User routes
   //Sign in
   app.post('/signin', passport.authenticate('local-signin', {

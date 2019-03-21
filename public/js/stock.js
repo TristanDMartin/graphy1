@@ -211,11 +211,19 @@ $("#close-modal").on("click", function(e) {
 
 $("#submit-modal").on("click", (e) => {
     e.preventDefault();
+    var modalVals = {
+        symbol: $("#graph-modal-symbol").val(),
+        date: $("#graph-modal-date").val(),
+        text: $("#graph-modal-text").val()
+    }
 
     $.ajax({
         url: "/api/pin",
-        type: "POST"
+        type: "POST",
+        data: modalVals
     }).then((result) => {
-        
+        // console.log(result);
+    }).catch( (err) => {
+        throw err;
     })
 })
