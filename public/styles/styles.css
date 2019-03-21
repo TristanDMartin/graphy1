@@ -24,6 +24,11 @@ body {
   font-size: 87px;
 }
 
+/*GRAPH CSS */
+#chart-title{
+  background-color: white;
+  text-align: center;
+}
 
 /* RESPONSIVE CSS
 -------------------------------------------------- */

@@ -17,6 +17,11 @@ var dateArr = [];
 var openArr = [];
 var closeArr = [];
 
+//variables to save Pins
+var currentUser;
+var currentStock;
+var pinInput;
+
 function getStockTicker(searchTerm) {
 
     //AJAX Call to search with the Name** term. 
@@ -35,6 +40,7 @@ function getStockTicker(searchTerm) {
                 //Pass the symbol into getStockChart as the ticker is required for our API query
 
                 chartTitle = stockName;
+                currentStock = symbol;
 
                 getStockChart(symbol);
                 // & pass stockName into getHeadlines -> nytCode.js -> to grab and search articles with that keyword.
@@ -51,7 +57,10 @@ function getStockTicker(searchTerm) {
                     if (result[0]) {
                         var stockName = result[0].search_term;
                         var symbol = result[0].symbol;
+
                         chartTitle = stockName;
+                        currentStock = symbol;
+
                         getStockChart(symbol);
                         getHeadlines(stockName);
                     }
@@ -137,11 +146,12 @@ function makeGraph(result) {
             }
         };
         //Chart new LineChart and placing it in the #chart_div 
-        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        var chart = new google.visualization.LineChart(document.getElementById('chart-div'));
         //draw creates the chart from our new chart object and passes our data, options defined above. 
         chart.draw(data, options);
         google.visualization.events.addListener(chart, 'select', selectHandler);
-        $("#chart_title").text(chartTitle);
+        $("#chart-title").text(chartTitle);
+        $("#chart-title").css("padding-bottom", "5px");
 
         function selectHandler(){
             $.ajax({
@@ -155,6 +165,9 @@ function makeGraph(result) {
                     $("#graph-modal").fadeIn("show");
                     console.log(user.email+ " selected " + JSON.stringify(selection));
                     $("#graph-modal-text").text("You will make a pin at: " + dateReadable[selection[0]["row"]]+ " (format: YYYY-MM-DD)");
+                    $("#graph-modal-date").attr("value", dateReadable[selection[0]["row"]]);
+                    console.log(currentStock);
+                    $("#graph-modal-symbol").attr("value", currentStock);
                 }
             });
         
@@ -194,4 +207,15 @@ $("#close-modal").on("click", function(e) {
     e.preventDefault();
 
     $("#graph-modal").fadeOut();
+})
+
+$("#submit-modal").on("click", (e) => {
+    e.preventDefault();
+
+    $.ajax({
+        url: "/api/pin",
+        type: "POST"
+    }).then((result) => {
+        
+    })
 })
