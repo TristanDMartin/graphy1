@@ -419,10 +419,11 @@ input[type=submit]:hover {
 // Extra small devices (portrait phones, less than 576px)
 @media (max-width: 575.98px) { ... } */
 
-#chart-div {
-  padding: 10px;
+/* div#chart-div {
+  padding-top: 100px;
+  margin-top: 10rem;
   border-radius: 2px;
-}
+} */
 
 #graphy-logo {
   width: 3rem;
