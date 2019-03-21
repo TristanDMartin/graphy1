@@ -6,9 +6,7 @@
     <li class="dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">
         <span class="glyphicon glyphicon-user"></span> 
-
-        {{#if user}}<strong>{{user.email}}</strong>{{else}} <strong>Login</strong>{{/if}}
-
+        {{#if user}}<strong>{{user.email}}</strong>{{else}}<strong>Login</strong>{{/if}}
         <span class="glyphicon glyphicon-chevron-down"></span>
       </a>
       {{#if user}}
