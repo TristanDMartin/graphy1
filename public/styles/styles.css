@@ -92,6 +92,7 @@ footer {
 }
 
 .form-group {
+  margin: auto;
   text-align: center;
   width: 50%;
 
