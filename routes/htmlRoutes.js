@@ -43,8 +43,15 @@ module.exports = function (app, passport) {
   // });
 
   app.get('/user', isLoggedIn, (req, res, {user}) => {
-    res.render("user");
-    console.log(req.user.id);
+    if(req.isAuthenticated()){
+      db.Pin.findAll({where: {user_id: req.user.id}}).then( (dbPins) => {
+        res.render("user", {
+          pin: dbPins 
+        });
+      });
+    } else {
+      res.redirect("/");
+    }
   });
 
   function isLoggedIn(req, res, next) {

@@ -138,6 +138,10 @@ function makeGraph(result) {
 
         //Options for display on our chart. 
         var options = {
+            animation: {
+                duration: 1000,
+                easing: 'in'
+            },
             hAxis: {
                 title: 'Time'
             },
