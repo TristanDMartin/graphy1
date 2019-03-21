@@ -24,10 +24,6 @@ function getStockTicker(searchTerm) {
                 getStockChart(symbol);
                 // & pass stockName into getHeadlines -> nytCode.js -> to grab and search articles with that keyword.
                 getHeadlines(stockName);
-                //Setting the value to "" so the input field is empty.
-                $("#search-term").val("");
-                //Placeholder created to store the previous request. - Fancy ;) 
-                $("#search-term").attr("placeholder", querySearch);
             }
             //Else call the other AJAX call to check by ticker name instead.
             else {
@@ -37,20 +33,16 @@ function getStockTicker(searchTerm) {
                 }).then((result) => {
                     //IF true, and the ticker has been found from the search term, continue to call the functions to create 
                     // both the chart and articles.
-                    if (result) {
+                    if (result[0]) {
                         var stockName = result[0].search_term;
                         var symbol = result[0].symbol;
                         getStockChart(symbol);
                         getHeadlines(stockName);
-                        //Setting the value to "" so the input field is empty.
-                        $("#search-term").val("");
-                        //Placeholder created to store the previous request. - Fancy ;) 
-                        $("#search-term").attr("placeholder", querySearch);
                     }
                     //ELSE if we get to this point and the search term is invalid by company name and ticker, let the customer know
                     // they need to try again. We've checked both ticker and company name in the seeds.sql.
                     else {
-                        $("#myModal").toggle();
+                        $('#myModal2').modal('toggle');
                     }
                 })
             }
@@ -152,10 +144,14 @@ $("#run-search").on("click", function (event) {
         getStockTicker(querySearch);
         //Emptying the article section in the event this isn't the first search.
         $("#article-section").empty();
+        //Setting the value to "" so the input field is empty.
+        $("#search-term").val("");
+        //Placeholder created to store the previous request. - Fancy ;) 
+        $("#search-term").attr("placeholder", querySearch);
     }
     else {
         //If the user does not put any values in the search field please try again. 
-        $("#article-section").text("Please enter a search term.");
+        $('#myModal').modal('toggle');
     }
 
 });
