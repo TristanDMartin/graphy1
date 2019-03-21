@@ -3502,5 +3502,6 @@ UPDATE stock_master SET search_term = REPLACE(search_term, " Group", "");
 UPDATE stock_master SET search_term = REPLACE(search_term, " Group ", "");
 UPDATE stock_master SET search_term = REPLACE(search_term, "Alphabet", "Google");
 
-
-SELECT * FROM stock_master;
+USE h0c925ggbq0ywmis;
+SELECT * FROM Pins
+SELECT * FROM Pins;

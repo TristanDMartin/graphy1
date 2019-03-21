@@ -54,15 +54,20 @@ module.exports = function (app, passport) {
     res.redirect('/signin');
   };
 
-  function isLoggedInHome(req, res, next) {
-    if (req.isAuthenticated())
-      return next();
-
-    res.redirect('/signin');
-  };
-
-  // Render 404 page for any unmatched routes
-  app.get("*", function (req, res) {
-    res.render("404");
+  app.get('/pins', (req, res) => {
+    if(req.isAuthenticated()){
+      db.Pin.findAll({where: {user_id: req.user.id}}).then( (dbPins) => {
+        res.render("pins", {
+          pin: dbPins 
+        });
+      });
+    } else {
+      res.redirect("/");
+    }
   });
+
+   // Render 404 page for any unmatched routes
+ app.get("*", function (req, res) {
+  res.render("404");
+});
 };
