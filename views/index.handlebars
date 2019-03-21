@@ -1,12 +1,14 @@
-<div id="maincontainer">
-<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-sm-3 col-md-3 mr-0" href="#">Graphy</a>
+<nav class="navbar navbar-dark bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-sm-3 col-md-3 mr-0" href="#"><img id="graphy-logo"
+      alt="graphy logo" src="../styles/graphyLogo.png" class="hvr-push"></a>
   <!-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> -->
   <ul class="nav navbar-nav navbar-right">
     <li class="dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">
         <span class="glyphicon glyphicon-user"></span> 
-        {{#if user}}<strong>{{user.email}}</strong>{{else}}<strong>USER NAME</strong>{{/if}}
+
+        {{#if user}}<strong>{{user.email}}</strong>{{else}} <strong>Login</strong>{{/if}}
+
         <span class="glyphicon glyphicon-chevron-down"></span>
       </a>
       {{#if user}}
@@ -72,360 +74,398 @@
 </nav>
 
 
-        <!-- adding widget into space -->
-        <div class="col-md-12" id="color001">
+<!-- adding widget into space -->
+<div class="col-md-12" id="color001">
+  <!-- TradingView Widget BEGIN -->
+  <div class="tradingview-widget-container">
+    <div class="tradingview-widget-container__widget"></div>
+    <!-- <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com" rel="noopener" target="_blank"><span
+                            class="blue-text"></span></a> </div> -->
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js"
+      async>
+        {
+          "symbols": [
+            {
+              "title": "S&P 500",
+              "proName": "INDEX:SPX"
+            },
+            {
+              "title": "Shanghai Composite",
+              "proName": "INDEX:XLY0"
+            },
+            {
+              "title": "EUR/USD",
+              "proName": "FX_IDC:EURUSD"
+            },
+            {
+              "title": "BTC/USD",
+              "proName": "BITFINEX:BTCUSD"
+            },
+            {
+              "title": "ETH/USD",
+              "proName": "BITFINEX:ETHUSD"
+            }
+          ],
+            "theme": "dark",
+              "isTransparent": false,
+                "displayMode": "adaptive",
+                  "locale": "en"
+        }
+      </script>
+  </div>
+</div>
+<!-- TradingView Widget END -->
+<!-- finishing the top portion -->
+
+
+<div class="container-fluid">
+
+  <!-- Main Bootstrap Search -->
+  <div class="container">
+
+    <!-- CHART HTML (see script at bottom) -->
+    <div id="chart_div"></div>
+    <!-- CHART HTML (see script at bottom) -->
+
+    <!-- Row for Searching New York Times -->
+    <div class="row">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-8" data-aos="fade-up">
+        <br>
+        <!-- First card is for handling the search parameters -->
+        <div class="card" id="searchCard">
+          <div class="card-header">
+            <strong>Search for a Stock!</strong>
+          </div>
+          <div class="card-body" id="search_card">
+            <!-- Here we create an HTML Form for handling the inputs-->
+            <form role="form">
+
+              <!-- Here we create the text box for capturing the search term-->
+              <div class="form-group">
+                <label for="search">Search Term:</label>
+                <input type="text" class="form-control" id="search-term" placeholder="" autofocus autocomplete="off">
+              </div>
+
+              <!-- Here we have our final submit button -->
+              <button type="submit" class="btn btn-default hvr-push" id="run-search" >Search</button>
+              <button class="btn btn-default hvr-push" id="clear-all">Clear Results</button>
+
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-2"></div>
+    </div>
+
+    <!-- This row will handle all of the retrieved articles -->
+    <div class="row">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-10" style="display:none;" id="hidden_articles">
+        <br>
+
+        <!-- This card will initially be made up of a card and wells for each of the articles retrieved -->
+        <div class="card">
+
+          <!-- card Heading for the retrieved articles box -->
+          <div class="card-header">
+            <strong>Top Articles</strong>
+          </div>
+
+          <!-- This main card will hold each of the resulting articles -->
+          <div class="card-body" id="article-section">
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-1"></div>
+
+    </div>
+  </div>
+  <!-- finished add-on for mike/lucas information -->
+
+
+
+  <div class="color1">
+    <div class="container-fluid" data-aos="fade-down" data-aos-offset="350">
+      <div id="market">
+        <h2>Markets</h2>
+      </div>
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+          <p>
             <!-- TradingView Widget BEGIN -->
-            <div class="tradingview-widget-container1">
-                <div class="tradingview-widget-container__widget"></div>
-                <!-- <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com" rel="noopener" target="_blank"><span
-                                          class="blue-text"></span></a> </div> -->
-                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js"
-                    async>
-                        {
-                            "symbols": [
-                                {
-                                    "title": "S&P 500",
-                                    "proName": "INDEX:SPX"
-                                },
-                                {
-                                    "title": "Shanghai Composite",
-                                    "proName": "INDEX:XLY0"
-                                },
-                                {
-                                    "title": "EUR/USD",
-                                    "proName": "FX_IDC:EURUSD"
-                                },
-                                {
-                                    "title": "BTC/USD",
-                                    "proName": "BITFINEX:BTCUSD"
-                                },
-                                {
-                                    "title": "ETH/USD",
-                                    "proName": "BITFINEX:ETHUSD"
-                                }
-                            ],
-                                "theme": "dark",
-                                    "isTransparent": false,
-                                        "displayMode": "adaptive",
-                                            "locale": "en"
-                        }
-                    </script>
+            <div class="tradingview-widget-container">
+              <div id="tv-medium-widget"></div>
+              <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/AAPL/"
+                  rel="noopener" target="_blank"><span class="blue-text"></span></a> <a
+                  href="https://www.tradingview.com/symbols/GOOGL/" rel="noopener" target="_blank"><span
+                    class="blue-text"></span></a> <span class="blue-text"></span>
+                <a href="https://www.tradingview.com/symbols/MSFT/" rel="noopener" target="_blank"><span
+                    class="blue-text"></span></a></div>
+              <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+              <script type="text/javascript">
+                new TradingView.MediumWidget(
+                  {
+                    "container_id": "tv-medium-widget",
+                    "symbols": [
+                      [
+                        "Apple",
+                        "AAPL "
+                      ],
+                      [
+                        "Google",
+                        "GOOGL"
+                      ],
+                      [
+                        "Microsoft",
+                        "MSFT"
+                      ]
+                    ],
+                    "greyText": "Quotes by",
+                    "gridLineColor": "#e9e9ea",
+                    "fontColor": "#83888D",
+                    "underLineColor": "#dbeffb",
+                    "trendLineColor": "#4bafe9",
+                    "width": "350px",
+                    "height": "350px",
+                    "locale": "en"
+                  }
+                );
+              </script>
             </div>
+            <!-- TradingView Widget END -->
+          </p>
+          <!-- <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p> -->
+        </div>
+        <div class="col-md-4">
+          <h2></h2>
+          <p>
+            <!-- TradingView Widget BEGIN -->
+            <div class="tradingview-widget-container">
+              <div class="tradingview-widget-container__widget"></div>
+              <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/FX-EURUSD/"
+                  rel="noopener" target="_blank"><span class="blue-text"></span></a></div>
+              <script type="text/javascript"
+                src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+                  {
+                    "symbol": "FX:EURUSD",
+                      "width": "350",
+                        "height": "350",
+                          "locale": "en",
+                            "dateRange": "1y",
+                              "colorTheme": "light",
+                                "trendLineColor": "#37a6ef",
+                                  "underLineColor": "#e3f2fd",
+                                    "isTransparent": false,
+                                      "autosize": false,
+                                        "largeChartUrl": ""
+                  }
+                </script>
+            </div>
+            <!-- TradingView Widget END -->
+
+          </p>
+          <!-- <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p> -->
+        </div>
+        <div class="col-md-4">
+          <h2></h2>
+          <p>
+            <!-- TradingView Widget BEGIN -->
+            <div class="tradingview-widget-container">
+              <div class="tradingview-widget-container__widget"></div>
+              <div class="tradingview-widget-copyright"><a
+                  href="https://www.tradingview.com/markets/stocks-usa/market-movers-gainers/" rel="noopener"
+                  target="_blank"><span class="blue-text"></span></a></div>
+              <script type="text/javascript"
+                src="https://s3.tradingview.com/external-embedding/embed-widget-hotlists.js" async>
+                  {
+                    "exchange": "US",
+                      "showChart": false,
+                        "locale": "en",
+                          "largeChartUrl": "",
+                            "width": "350",
+                              "height": "350"
+                  }
+                </script>
+            </div>
+            <!-- TradingView Widget END -->
+
+          </p>
+          <!-- <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p> -->
+        </div>
+      </div>
+
+
+    </div> <!-- /container -->
+  </div>
+  <!-- START THE FEATURETTES -->
+  <div class="color2">
+    <div class="row">
+      <div class="col-md-7" data-aos="fade-right" id="advancedDiv" data-aos-offset="250">
+        <h2 class="featurette-heading">Advanced Real-Time Chart <span class="text-muted"></span></h2>
+        <p class="lead">A free and powerful charting solution that easily embeds into any website.</p>
+      </div>
+      <div class="col-md-4" data-aos="fade-left" data-aos-offset="250">
+        <!-- TradingView Widget BEGIN -->
+        <div class="tradingview-widget-container">
+          <div id="tradingview_18e3d"></div>
+          <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/NASDAQ-AAPL/"
+              rel="noopener" target="_blank"><span class="blue-text"></span></a></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+          <script type="text/javascript">
+            new TradingView.widget(
+              {
+                "width": 500,
+                "height": 500,
+                "symbol": "NASDAQ:AAPL",
+                "interval": "D",
+                "timezone": "Etc/UTC",
+                "theme": "Light",
+                "style": "9",
+                "locale": "en",
+                "toolbar_bg": "#f1f3f6",
+                "enable_publishing": false,
+                "withdateranges": true,
+                "allow_symbol_change": true,
+                "container_id": "tradingview_18e3d"
+              }
+            );
+          </script>
         </div>
         <!-- TradingView Widget END -->
-        <!-- finishing the top portion -->
-
-            <!-- Main Bootstrap Search -->
-            <div id="container">
-                <!-- CHART HTML (see script at bottom) -->
-                <div id="chart_div"></div>
-                <!-- CHART HTML (see script at bottom) -->
-
-                <!-- Row for Searching New York Times -->
-                <div class="row">
-                    <div class="col-sm-2"></div>
-                    <div class="col-sm-8">
-                        <br>
-                        <!-- First card is for handling the search parameters -->
-                        <div class="card">
-                            <div class="card-header">
-                                <strong>Search for a Stock!</strong>
-                            </div>
-                            <div class="card-body">
-
-                                <!-- Here we create an HTML Form for handling the inputs-->
-                                <form role="form">
-
-                                    <!-- Here we create the text box for capturing the search term-->
-                                    <div class="form-group1">
-                                        <label for="search">Search Term:</label>
-                                        <input type="text" class="form-control" id="search-term" placeholder=""
-                                            autofocus>
-                                    </div>
-
-                                    <!-- Here we have our final submit button -->
-                                    <button type="submit" class="btn btn-default" id="run-search">Search</button>
-                                    <button class="btn btn-default" id="clear-all">Clear Results</button>
-
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-2"></div>
-                </div>
-
-                <!-- This row will handle all of the retrieved articles -->
-                <div class="row">
-                    <div class="col-sm-1"></div>
-                    <div class="col-sm-10">
-                        <br>
-
-                        <!-- This card will initially be made up of a card and wells for each of the articles retrieved -->
-                        <div class="card">
-
-                            <!-- card Heading for the retrieved articles box -->
-                            <div class="card-header">
-                                <strong>Top Articles</strong>
-                            </div>
-
-                            <!-- This main card will hold each of the resulting articles -->
-                            <div class="card-body" id="article-section">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-1"></div>
-
-                </div>
-            </div>
-            <!-- finished add-on for mike/lucas information -->
-
-
-
-            <!-- Example row of columns -->
-            <div class="row color1">
-                <div class="col-md-12">
-                    <h2 id="market">Markets</h2>
-                </div>
-                <div class="col-sm">
-                </div>
-                <div class="col-sm">
-                    <h2></h2>
-                    <p>
-                        <!-- TradingView Widget BEGIN -->
-                        <!-- <div class="tradingview-widget-container"> -->
-                            <!-- <div id="tv-medium-widget"></div>
-                            <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/AAPL/"
-                                    rel="noopener" target="_blank"><span class="blue-text"></span></a> <a href="https://www.tradingview.com/symbols/GOOGL/"
-                                    rel="noopener" target="_blank"><span class="blue-text"></span></a> <span class="blue-text"></span>
-                                <a href="https://www.tradingview.com/symbols/MSFT/" rel="noopener" target="_blank"><span
-                                        class="blue-text"></span></a></div> -->
-                            <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-                            <script type="text/javascript">
-                                new TradingView.MediumWidget(
-                                    {
-                                        "container_id": "tv-medium-widget",
-                                        "symbols": [
-                                            [
-                                                "Apple",
-                                                "AAPL "
-                                            ],
-                                            [
-                                                "Google",
-                                                "GOOGL"
-                                            ],
-                                            [
-                                                "Microsoft",
-                                                "MSFT"
-                                            ]
-                                        ],
-                                        "greyText": "Quotes by",
-                                        "gridLineColor": "#e9e9ea",
-                                        "fontColor": "#83888D",
-                                        "underLineColor": "#dbeffb",
-                                        "trendLineColor": "#4bafe9",
-                                        "width": "350px",
-                                        "height": "350px",
-                                        "locale": "en"
-                                    }
-                                );
-                            </script>
-                        <!-- </div> -->
-                        <!-- TradingView Widget END -->
-                    </p>
-                    <!-- <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p> -->
-                </div>
-                <div class="col-sm">
-                    <h2></h2>
-                    <p>
-                        <!-- TradingView Widget BEGIN -->
-                        <!-- <div class="tradingview-widget-container"> -->
-                            <!-- <div class="tradingview-widget-container__widget"></div>
-                            <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/FX-EURUSD/"
-                                    rel="noopener" target="_blank"><span class="blue-text"></span></a></div> -->
-                            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js"
-                                async>
-                                    {
-                                        "symbol": "FX:EURUSD",
-                                            "width": "350",
-                                                "height": "350",
-                                                    "locale": "en",
-                                                        "dateRange": "1y",
-                                                            "colorTheme": "light",
-                                                                "trendLineColor": "#37a6ef",
-                                                                    "underLineColor": "#e3f2fd",
-                                                                        "isTransparent": false,
-                                                                            "autosize": false,
-                                                                                "largeChartUrl": ""
-                                    }
-                            </script>
-                        <!-- </div> -->
-                        <!-- TradingView Widget END -->
-
-                    </p>
-                    <!-- <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p> -->
-                </div>
-                <div class="col-sm">
-                    <h2></h2>
-                    <p>
-                        <!-- TradingView Widget BEGIN -->
-                        <!-- <div class="tradingview-widget-container"> -->
-                            <!-- <div class="tradingview-widget-container__widget"></div>
-                            <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/markets/stocks-usa/market-movers-gainers/"
-                                    rel="noopener" target="_blank"><span class="blue-text"></span></a></div> -->
-                            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-hotlists.js"
-                                async>
-                                    {
-                                        "exchange": "US",
-                                            "showChart": false,
-                                                "locale": "en",
-                                                    "largeChartUrl": "",
-                                                        "width": "350",
-                                                            "height": "350"
-                                    }
-                            </script>
-                        <!-- </div> -->
-                        <!-- TradingView Widget END -->
-
-                    </p>
-                    <!-- <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p> -->
-                </div>
-                <div class="col-sm">
-                </div>
-                <!-- </div> -->
-            </div>
-            <!-- START THE FEATURETTES -->
-            <!-- <div class="color2"> -->
-            <div class="row color2">
-                <div class="col-md-12">
-                </div>
-                <div class="col-md-7">
-                    <h2 class="featurette-heading">Advanced Real-Time Chart <span class="text-muted"></span></h2>
-                    <p class="lead">A free and powerful charting solution that easily embeds into any website.</p>
-                </div>
-                <div class="col-md-5">
-                    <!-- TradingView Widget BEGIN -->
-                    <!-- <div class="tradingview-widget-container"> -->
-                        <!-- <div id="tradingview_18e3d"></div>
-                        <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/NASDAQ-AAPL/"
-                                rel="noopener" target="_blank"><span class="blue-text"></span></a></div> -->
-                        <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-                        <script type="text/javascript">
-                            new TradingView.widget(
-                                {
-                                    "width": 500,
-                                    "height": 500,
-                                    "symbol": "NASDAQ:AAPL",
-                                    "interval": "D",
-                                    "timezone": "Etc/UTC",
-                                    "theme": "Light",
-                                    "style": "9",
-                                    "locale": "en",
-                                    "toolbar_bg": "#f1f3f6",
-                                    "enable_publishing": false,
-                                    "withdateranges": true,
-                                    "allow_symbol_change": true,
-                                    "container_id": "tradingview_18e3d"
-                                }
-                            );
-                        </script>
-                    <!-- </div> -->
-                    <!-- TradingView Widget END -->
-                </div>
-            </div>
-            <!-- </div> -->
-
-            <!-- <hr class="featurette-divider"> -->
-            <div class="color3">
-                <div class="row">
-                    <div class="col-md-12">
-                    </div>
-                    <div class="col-md-7 order-md-2">
-                        <h2 class="featurette-heading">Technical Analysis <span class="text-muted"></span></h2>
-                        <p class="lead">is a trading discipline employed to evaluate investments and identify trading
-                            opportunities by analyzing statistical trends gathered from trading activity, such as price
-                            movement and volume.</p>
-                    </div>
-                    <div class="col-md-5">
-                        <!-- TradingView Widget BEGIN -->
-                        <!-- <div class="tradingview-widget-container"> -->
-                            <!-- <div class="tradingview-widget-container__widget"></div> -->
-                            <!-- <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/NASDAQ-AAPL/technicals/"
-                                    rel="noopener" target="_blank"><span class="blue-text"></span></a>
-                            </div> -->
-                            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js"
-                                async>
-                                    {
-                                        "showIntervalTabs": true,
-                                            "locale": "en",
-                                                "symbol": "NASDAQ:AAPL",
-                                                    "interval": "1m",
-                                                        "height": 500,
-                                                            "width": 500
-                                    }
-                            </script>
-                        <!-- </div> -->
-                        <!-- TradingView Widget END -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- <hr class="featurette-divider"> -->
-            <div class="color4">
-                <div class="row">
-                    <div class="col-md-12">
-                    </div>
-                    <div class="col-md-7">
-                        <h2 class="featurette-heading">Forex Cross Rates <span class="text-muted"></span></h2>
-                        <p class="lead">A cross rate is the currency exchange rate between two currencies when neither
-                            are
-                            the
-                            official currencies of the country in which the exchange rate quote is given. Foreign
-                            exchange
-                            traders use the term to refer to currency quotes that do not involve the U.S. dollar,
-                            regardless of
-                            what country the quote is provided in.</p>
-                    </div>
-                    <div class="col-md-5">
-                        <!-- TradingView Widget BEGIN -->
-                        <!-- <div class="tradingview-widget-container"> -->
-                            <!-- <div class="tradingview-widget-container__widget"></div> -->
-                            <!-- <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/markets/currencies/forex-cross-rates/"
-                                    rel="noopener" target="_blank"><span class="blue-text"></span></a></div> -->
-                            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js"
-                                async>
-                                    {
-                                        "width": 500,
-                                            "height": 500,
-                                                "currencies": [
-                                                    "EUR",
-                                                    "USD",
-                                                    "JPY",
-                                                    "GBP",
-                                                    "CHF",
-                                                    "AUD",
-                                                    "CAD",
-                                                    "NZD",
-                                                    "CNY"
-                                                ],
-                                                    "locale": "en"
-                                    }
-                            </script>
-                        <!-- </div> -->
-                        <!-- TradingView Widget END -->
-                    </div>
-                </div>
-            </div>
-            <!-- /END THE FEATURETTES -->
-
-        <!-- </div> -->
+      </div>
     </div>
-    <footer>
-        <p>© 2019 Graphy. All rights reserved.
-            <a href="#">Back to top</a></p>
-    </footer>
+  </div>
+
+  <!-- <hr class="featurette-divider"> -->
+  <div class="color3">
+    <div class="row">
+      <div class="col-md-7 order-md-2" data-aos="fade-right" data-aos-offset="250">
+        <h2 class="featurette-heading">Technical Analysis <span class="text-muted"></span></h2>
+        <p class="lead">is a trading discipline employed to evaluate investments and identify trading
+          opportunities by analyzing statistical trends gathered from trading activity, such as price
+          movement and volume.</p>
+      </div>
+      <div class="col-md-5 order-md-1" data-aos="fade-left" data-aos-offset="250">
+        <!-- TradingView Widget BEGIN -->
+        <div class="tradingview-widget-container">
+          <div class="tradingview-widget-container__widget"></div>
+          <div class="tradingview-widget-copyright"><a
+              href="https://www.tradingview.com/symbols/NASDAQ-AAPL/technicals/" rel="noopener" target="_blank"><span
+                class="blue-text"></span></a>
+          </div>
+          <script type="text/javascript"
+            src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" async>
+              {
+                "showIntervalTabs": true,
+                  "locale": "en",
+                    "symbol": "NASDAQ:AAPL",
+                      "interval": "1m",
+                        "height": "500",
+                          "width": "500"
+              }
+            </script>
+        </div>
+        <!-- TradingView Widget END -->
+      </div>
+    </div>
+  </div>
+
+  <!-- <hr class="featurette-divider"> -->
+  <div class="color4">
+    <div class="row">
+      <div class="col-md-7" data-aos="zoom-out-down" id="currencyTextDiv" data-aos-offset="250">
+        <h2 class="featurette-heading">Forex Cross Rates <span class="text-muted"></span></h2>
+        <p class="lead">A cross rate is the currency exchange rate between two currencies when neither are
+          the
+          official currencies of the country in which the exchange rate quote is given. Foreign exchange
+          traders use the term to refer to currency quotes that do not involve the U.S. dollar,
+          regardless of
+          what country the quote is provided in.</p>
+      </div>
+      <div class="col-md-4" data-aos="zoom-out-up" id="currencyDiv" data-aos-offset="250">
+        <!-- TradingView Widget BEGIN -->
+        <div class="tradingview-widget-container">
+          <div class="tradingview-widget-container__widget"></div>
+          <div class="tradingview-widget-copyright"><a
+              href="https://www.tradingview.com/markets/currencies/forex-cross-rates/" rel="noopener"
+              target="_blank"><span class="blue-text"></span></a></div>
+          <script type="text/javascript"
+            src="https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js" async>
+              {
+                "width": "500",
+                  "height": "500",
+                    "currencies": [
+                      "EUR",
+                      "USD",
+                      "JPY",
+                      "GBP",
+                      "CHF",
+                      "AUD",
+                      "CAD",
+                      "NZD",
+                      "CNY"
+                    ],
+                      "locale": "en"
+              }
+            </script>
+        </div>
+        <!-- TradingView Widget END -->
+      </div>
+    </div>
+  </div>
+  <!-- /END THE FEATURETTES -->
+
+
+  <!-- Modal HTML -->
+  <div id="myModal" class="modal fade">
+    <div class="modal-dialog modal-confirm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="icon-box">
+            <i class="material-icons">&#xE5CD;</i>
+          </div>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body text-center">
+          <h4>Ooops!</h4>
+          <p>No input found. Please enter a search.</p>
+          <button class="btn btn-success" data-dismiss="modal">Try Again</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal HTML -->
+  <div id="myModal2" class="modal fade">
+    <div class="modal-dialog modal-confirm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="icon-box">
+            <i class="material-icons">&#xE5CD;</i>
+          </div>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body text-center">
+          <h4>Ooops!</h4>
+          <p>Sorry, we could not find any results for that search.</p>
+          <button class="btn btn-success" data-dismiss="modal">Try Again</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 </div>
 
-<!-- Modal -->
+
+<footer>
+  <p>© 2019 Graphy. All rights reserved.
+    <a href="#">Back to top</a></p>
+</footer>
+
+
 <div id="graph-modal" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -449,6 +489,7 @@
     </div>
   </div>
 </div>
+
 
 
 <script src="/js/nytCode.js"></script>
