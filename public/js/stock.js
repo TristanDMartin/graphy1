@@ -31,11 +31,8 @@ function getStockTicker(searchTerm) {
                 var stockName = result[0].search_term;
                 //symbol stores the symbol from our result passed as a parameter.
                 var symbol = result[0].symbol;
-
                 //Pass the symbol into getStockChart as the ticker is required for our API query
-
                 chartTitle = stockName;
-
                 getStockChart(symbol);
                 // & pass stockName into getHeadlines -> nytCode.js -> to grab and search articles with that keyword.
                 getHeadlines(stockName);
@@ -92,6 +89,7 @@ function makeGraph(result) {
     //Stock object
     var values = result["Time Series (Daily)"];
     //Clearing the current div in order to populate the new. 
+    console.log("&&&&&&&&&&&&&&&&&&&&&&&&&& CLEARIN?G DIV");
     $("#chart-div").empty();
 
     //For loop in order to keep our search results limited to the past 30 days worth of data.
