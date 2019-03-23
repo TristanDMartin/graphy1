@@ -24,6 +24,12 @@ var pinInput;
 
 function getStockTicker(searchTerm) {
 
+    x = [];
+    rowsArr = [];
+    dateReadable = [];
+    dateArr = [];
+    openArr = [];
+    closeArr = [];
     //AJAX Call to search with the Name** term. 
     $.ajax({
         url: "api/search/" + searchTerm,
@@ -98,10 +104,10 @@ function getStockChart(symbol) {
 //Function called passing our result from getStockChart
 function makeGraph(result) {
 
+    $("#chart-div").empty();
     //Stock object
     var values = result["Time Series (Daily)"];
     //Clearing the current div in order to populate the new. 
-    $("#chart-div").empty();
 
     //For loop in order to keep our search results limited to the past 30 days worth of data.
     for (var i = 0; i < 30; i++) {
@@ -138,10 +144,6 @@ function makeGraph(result) {
 
         //Options for display on our chart. 
         var options = {
-            animation: {
-                duration: 1000,
-                easing: 'in'
-            },
             hAxis: {
                 title: 'Time'
             },
@@ -183,6 +185,7 @@ function makeGraph(result) {
 //on click event
 $("#run-search").on("click", function (event) {
     event.preventDefault();
+
     //Search term stored in var querySearch
     var querySearch = $("#search-term").val().toLowerCase();
     //If the variable has a value in the input field then ..
